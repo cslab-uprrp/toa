@@ -1,0 +1,622 @@
+@import url("bootstrap.min.css");
+
+/********** Template Style ************/
+
+html{
+
+	overflow-x:hidden;
+
+	text-align: left!important;
+
+}
+
+body{
+
+	background-image:url("../img/back.png");
+
+	overflow-x:hidden;
+
+	text-align: left!important;
+
+}
+
+.page-header{
+
+	border-bottom: 1px solid #e25d33!important;
+
+}
+
+.modal-no-padding{
+
+	padding: 0px;
+
+}
+
+/********** Template Style ************/
+
+/********** Banner Style ************/
+
+.brand{
+
+	margin-bottom: 4%;
+
+	margin-top: 3%;
+
+	padding-left: 2%;
+
+	font-size: 55px;
+
+	font-weight: 500px;
+
+	color: #e25d33;
+
+}
+
+/********** Banner Style ************/
+
+/********** Feature Bar Style ************/
+
+.feature-bar{
+
+	background-color: #333;
+
+	z-index: 1;
+
+}
+
+.feature-bar-group{
+
+	margin-top: 2%;
+
+	margin-bottom:2%;
+
+}
+
+.last{
+
+	border-top-right-radius: 5px!important;
+
+	border-bottom-right-radius: 5px!important;
+
+}
+
+.btn-feature-bar, .btn-feature-bar:focus{
+
+	color:#333;
+
+	background-color: #e25d33;
+
+	border:1px solid #e25d33;
+
+	font-weight: bold;
+
+}
+
+#content{
+
+	height:100%;
+
+	min-height:500px;
+
+}
+
+.btn-feature-bar:hover{
+
+	background-color: #c6451c;
+
+	border:1px solid #c6451c;
+
+}
+
+.dropdown-submenu{position:relative;}
+.dropdown-submenu>.dropdown-menu{top:0;left:100%;margin-top:-6px;margin-left:-1px;-webkit-border-radius:0 6px 6px 6px;-moz-border-radius:0 6px 6px 6px;border-radius:0 6px 6px 6px;}
+.dropdown-submenu:hover>.dropdown-menu{display:block;}
+.dropdown-submenu>a:after{display:block;content:" ";float:right;width:0;height:0;border-color:transparent;border-style:solid;border-width:5px 0 5px 5px;border-left-color:#cccccc;margin-top:5px;margin-right:-10px;}
+.dropdown-submenu:hover>a:after{border-left-color:#ffffff;}
+.dropdown-submenu.pull-left{float:none;}.dropdown-submenu.pull-left>.dropdown-menu{left:-100%;margin-left:10px;-webkit-border-radius:6px 0 6px 6px;-moz-border-radius:6px 0 6px 6px;border-radius:6px 0 6px 6px;}
+
+/********** Feature Bar Style ************/
+
+/********** Content Style ************/
+
+#container{
+
+	width:100%!important;
+
+}
+
+.p2p-jumbotron{
+
+	margin-top: 7%;
+
+	margin-left: 5%;
+
+	border-radius: 7px;
+
+	min-height: 550px;
+
+	background-color: #333;
+
+}
+.infovisgraph{
+
+
+    width:100%;
+    height:650px;
+
+
+}
+
+.login-jumbotron{
+
+	margin-top: 7%;
+
+	background-color: transparent;
+
+}
+
+.btn-login{
+
+	margin-top: 4%;
+
+	color: #333;
+
+	background-color: #e25d33;
+
+	border: 1px solid #e25d33;
+
+	font-weight: bold;
+
+}
+
+.btn-login:hover{
+
+	background-color: #c6451c;
+
+	border:1px solid #c6451c;
+
+}
+
+.error-msg{
+
+	margin-top: 4%;
+
+}
+
+.device-col{
+
+	margin-left: 13%;
+
+}
+
+.device-col-header{
+
+	margin-bottom: 7%;
+
+}
+
+.device-col-button{
+
+	color:#e25d33;
+
+}
+
+.device-col-button:hover{
+
+	color:#c6451c;
+
+}
+
+.device-col-entry{
+
+	text-indent: 5%;
+
+}
+
+.device-col-edit-button{
+
+	margin-right: 3.5%;
+
+}
+
+.device-col-remove-button{
+
+	margin-right: 3%;
+
+}
+
+.view-col-header{
+
+	margin-bottom: 7%;
+
+}
+
+.view-col-button{
+
+	color:#e25d33;
+
+}
+
+.view-col-button:hover{
+
+	color:#c6451c;
+
+}
+
+.view-col-entry{
+
+	text-indent: 5%;
+
+}
+
+.view-col-edit-button{
+
+	margin-right: 3.5%;
+
+}
+
+.view-col-remove-button{
+
+	margin-right: 3%;
+
+}
+
+.add-device-form{
+
+	margin-top: 9%;
+
+}
+
+.add-device-button{
+
+	background-color: #e25d33;
+
+	color:#333;
+
+	font-weight: bold;
+
+}
+
+.add-device-button:hover, .add-device-button:focus{
+
+	background-color: #c6451c;
+
+	color:#333;
+
+}
+
+.add-view-form{
+
+	margin-top: 5%;
+
+}
+
+.add-view-button{
+
+	background-color: #e25d33;
+
+	color:#333;
+
+	font-weight: bold;
+
+	margin-right: 57%;
+
+}
+
+.add-view-button:hover, .add-view-button:focus{
+
+	background-color: #c6451c;
+
+	color:#333;	
+
+}
+
+.btn-graph-filter, .btn-graph-filter:focus{
+
+	color:#333;
+
+	background-color: #e25d33;
+
+	border:1px solid #e25d33;
+
+	font-weight: bold;
+
+}
+
+.btn-graph-filter:hover{
+
+	background-color: #c6451c;
+
+	border:1px solid #c6451c;
+
+}
+
+.graph-thumb{
+
+	padding: 0px;
+
+	margin-top: 2%;
+
+	background-color: #fff;
+
+	border: 2px solid #e25d33;
+
+	margin-bottom: 10%;
+
+	min-height:400px;
+
+	min-width: 760px;
+
+
+
+}
+
+.graph{
+
+	min-height:400px;
+
+	min-width: 750px;
+
+	margin: 0px;
+
+}
+
+.caption{
+
+	background-color: #e25d33;
+
+	height:65px;
+
+}
+
+.btn-add-graph, .btn-add-graph:focus{
+
+	color:#e25d33;
+
+	background-color: #333;
+
+	border:1px solid #333;
+
+	font-weight: bold;
+
+	margin-bottom: 1%;
+
+	margin-top: 0.3%;
+}
+
+.btn-add-graph:hover{
+
+	background-color: #333;
+
+	border:1px solid #333;
+
+	color: #c6451c;
+
+}
+
+.viewer{
+
+	width: 100%;
+
+	height: 100%;
+
+	padding: 0px;
+
+	margin: 0px;
+
+	left: 0%;
+
+	right:0%;
+
+}
+
+.viewer-body{
+
+	max-height: 100% !important;
+
+	overflow-y:auto;
+
+	overflow-x:hidden;
+
+}
+
+.graph-thumb-viewer{
+
+	padding: 0px;
+
+	margin: 0px;
+
+	background-color: #fff;
+
+	border: 2px solid #e25d33;
+
+	border-radius: 0px;
+
+	min-height:250px;
+
+	min-width: 500px;
+
+}
+
+.viewer-expand{
+
+	position:absolute;
+
+	left:1%;
+
+	top:0.5%;
+
+	z-index:1;
+
+}
+
+.viewer-close{
+
+	position:absolute;
+
+	right:1%;
+
+	top:0.5%;	
+
+	z-index: 1;
+
+}
+
+.custom-query-status{
+
+	margin-top: 7%;
+
+}
+
+.top100{
+
+	z-index: -1;
+
+}
+
+.plugin-header{
+
+	background-color: #e25d33!important;
+}
+
+.popover{
+
+	min-width: 276px;
+
+}
+
+/********** Content Style ************/
+
+/********** Box Style ****************/
+
+.btn-box{
+
+	background-color: #e25d33;
+
+	color:#333;
+
+	font-weight: bold;
+
+}
+
+.btn-box:hover, .btn-box:focus{
+
+	background-color: #c6451c;
+
+	color:#333;
+
+}
+
+.box-user{
+
+	margin-top: 12%;
+
+}
+
+/********** Box Style ****************/
+
+/********** Custom Query Calendar *****/
+
+#ui-datepicker-div{
+
+	border:1px solid #e25d33;
+
+	background-image:url("../img/back.png");
+
+	border-radius: 5px;
+
+	margin-top: 2%; 
+
+	width: 20%;
+
+	text-align: center;
+
+}
+
+.ui-datepicker-header{
+
+	background-color: #e25d33;
+
+}
+
+.ui-datepicker-prev {
+
+	color:#333;
+
+	margin-left: 3%;
+
+	margin-top: 2%;
+
+	float: left;
+
+	margin-bottom: 5%;
+
+}
+
+.ui-datepicker-prev:hover {
+
+	cursor: pointer;
+
+	color:#dddddd;
+
+	text-decoration: none;
+
+}
+
+.ui-datepicker-next {
+
+	color:#333;
+
+	float: right;
+
+	margin-right: 3%;
+
+	margin-top: 2%;
+
+	margin-bottom: 5%;
+
+}
+
+.ui-datepicker-next:hover {
+
+	cursor: pointer;
+
+	color:#dddddd;
+
+	text-decoration: none;
+
+}
+
+.ui-datepicker-title{
+
+	font-weight: bold;
+
+	margin-left: 15%;
+
+	padding-top: 5%;
+
+	padding-bottom: 5%;
+
+}
+
+.ui-datepicker-calendar{
+
+	width:100%;
+
+	margin-left: 4%;
+
+	margin-top: 1%;
+
+	margin-bottom: 5%;
+
+	text-align: left!important;
+
+}
+
+#ui-datepicker-div > select{
+
+	margin-bottom: 5%;
+
+}
+
+/********** Custom Query Calendar *****/

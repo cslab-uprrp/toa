@@ -1,0 +1,289 @@
+/*
+Author: Jhensen Grullon Sanabria
+Sources:
+css-tooltip: http://csstooltip.com/;
+help on button gradients: http://designshack.net/tutorialexamples/buttonanimations/
+divs and css color: http://html-color-codes.info/
+css and html reference: http://www.w3schools.com/css/
+used as a guide this css open source code: http://philogb.github.io/jit/static/v20/Jit/Examples/ForceDirected/example1.html
+*/
+
+html, body {
+		margin:0;
+		padding:0;
+		font-family: "Lucida Grande", Verdana;
+		font-size: 0.9em;
+		text-align: center;
+	-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+}
+.ui-widget-content{background: none;}
+ul{list-style-type: none;}
+#inner-details{
+	-webkit-user-select:text;
+	-moz-user-select: text;
+	-ms-user-select: text;
+	user-select:text;
+}
+.global_radius{
+	border-top-right-radius:5px;
+	border-top-left-radius:5px;
+	border-bottom-right-radius:5px;
+	border-bottom-left-radius:5px;
+	border-color:#edf0f5;
+}
+
+#display_button{
+	text-align:left;	
+	margin-top:5px;
+	padding-top:5px;
+	border-top-right-radius:5px;
+	border-top-left-radius:5px;
+	border-bottom-right-radius:5px;
+	border-bottom-left-radius:5px;
+	border-color:#edf0f5;
+	background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+	background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+	background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+	background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+	background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+	width:auto;
+}
+#display_button:hover{
+	border-color:#23A4FF;
+	background-color:#BACFF4;
+}
+hr{background-color:#C7CCCF;}
+h2 {
+	font-size:1.5em;
+	font-family:Verdana;
+	color:#23A4FF;
+	background-color:#c0c0c0;
+	border-top-right-radius:10px;
+	border-top-left-radius:10px;
+	border-bottom-right-radius:5px;
+	border-bottom-left-radius:5px;
+
+}
+h3{text-align:center;}
+#cp_title{text-align:center;top:3px;position:center;}
+.titleimg img{width:100%;height:100%;}
+#c_p > label { clear: both; float: left; margin-top: 6px; margin-right: 10px; width: 107px; }
+
+#connlist{
+	z-index:1;
+	float:left;
+	clear:both;
+	text-align:left;
+	position:absolute;
+	width: 18%;
+	top: 50px;
+	overflow-y: auto;
+	margin-left:15px;
+	background-color:#c0c0c0;
+}	
+#c_p{
+	z-index:1;
+	float:right;
+	clear:both;
+	white-space:normal;
+	text-align:left;
+	position:absolute;
+	background-color:#c0c0c0;
+	width: 18%;
+	right: 4px;
+	top: 50px;
+	overflow-y: auto;
+	margin-left:15px;
+}
+
+#connsett{text-align:left;}
+#conn_num{margin-left:.5em;}
+#conn_num:hover{border-color:#23a4ff;}
+#conn_num:focus{border-color:#23a4ff;background-color:#edf0f5;}
+/*#updwn_indicator{
+	background-image:url('/~jgrullon/jit/test/imgs/uparrow.png'
+}*/
+
+.inp_box:hover{
+	border-color:#23A4FF;
+}
+
+.inp_box:focus{
+	border-color:#23A4FF;	
+	background-color:#edf0f5;
+
+
+	outline-color: transparent;
+  outline-style: none;
+}
+
+.inp_box{
+	margin-bottom:25px;
+	height:20px;
+	width:50%;
+	border-color:#edf0f5;
+	margin-left:35px;
+}
+
+select:hover{
+	border-style:solid;
+	border-width:1px;
+	border-color:#23A4FF;
+}
+
+input, select {font-size:0.9em;}
+select{	
+	border-color:#c0c0c0;
+	height:26px;
+	margin-bottom:5px;
+	bottom:10px;
+}
+label,span{font-family:Palatino,Verdana;font-size:1.3em;text-align:left;color:#23A4FF;margin-left:10px;}
+#date_input > label{
+	width: 5em;
+	float: left;
+	
+}
+a {color:#23A4FF;}
+#fields{text-align:left;margin-left200px;}
+#updwn:hover{cursor:move;}
+#container {
+	width: 60%;
+	height: 600px;
+	margin:0 auto;
+	position:relative;
+	border-top-left-radius:65px;
+	border-bottom-right-radius:65px;
+		
+}
+#ifrm{text-align:left;}
+.fnbox{
+		margin-left:25px;
+	border-color:#edf0f5;
+}
+.frmbox{
+		margin-top:5px;
+		margin-left:35px;
+		padding-top:5px;
+		border-color:#edf0f5;
+	background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+		background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+		background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+		background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+	background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+}
+.frmbox:hover {
+	border-color:#23A4FF;
+		background-color:#BACFF4;
+}
+
+/*
+#left-container, #right-container {
+	width:200px;
+	color:#686c70;
+	text-align: left;
+	overflow: auto;
+	background-color:#fff;
+	background-repeat:no-repeat;
+	border-bottom:1px solid #ddd;
+}
+
+#left-container {
+	left:0;
+	background-image:url('col2.png');
+	background-position:center right;
+	border-left:1px solid #ddd;
+	
+}
+
+#right-container {
+	right:0;
+	background-image:url('col1.png');
+	background-position:center left;
+	border-right:1px solid #ddd;
+}
+
+#right-container h4{
+	text-indent:8px;
+}
+
+
+#center-container {
+		width:600px;
+		left:200px;
+		background-color:#1a1a1a;
+		color:#ccc;
+	border-top-right-radius:65px;
+		border-top-left-radius:65px;
+		border-bottom-right-radius:65px;
+		border-bottom-left-radius:65px;
+}
+*/
+
+
+#links{
+	background-color:#DEE5F2;
+	text-align:left;
+	height:35px;
+	border-bottom: 1px solid #e5e5e5;
+	}	
+
+.text {
+	margin: 7px;
+}
+
+#log {
+	position:relative;
+	top:10px;
+	font-size:1.0em;
+	font-weight:bold;
+	color:#23A4FF;
+}
+
+#center-container{
+border-top-left-radius:65px;
+border-bottom-right-radius:65px;    
+border-top-right-radius:155px;
+}
+#infovis {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	position:relative;
+	background-color:#000000; 
+	border-top-right-radius:65px;
+		border-top-left-radius:65px;
+		border-bottom-right-radius:65px;
+		border-bottom-left-radius:65px;
+	width:1000;
+	height:700px;
+		margin:auto;
+		overflow:hidden;
+}
+
+/*TOOLTIPS*/
+.tip {
+	color: #111;
+	width: 139px;
+	background-color: white;
+	border:1px solid #ccc;
+	-moz-box-shadow:#555 2px 2px 8px;
+	-webkit-box-shadow:#555 2px 2px 8px;
+	-o-box-shadow:#555 2px 2px 8px;
+	box-shadow:#555 2px 2px 8px;
+	opacity:0.9;
+	filter:alpha(opacity=90);
+	font-size:10px;
+	font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;
+	padding:7px;
+}
+
+.ui-datepicker {background-color: #FFF;}
+.ui-timepicker-table{
+	background-color: #FFF;
+
+}

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<link rel="shortcut icon" href="../style/img/favicon.ico"/>
+		<title> Network Monitoring Tool</title>
+		<!-- <script src="../build/Three.js" > </script>  -->
+		
+		<script src="../js/three.min.js"></script>
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css">
+		<script src="../style/jQuery/jquery-1.8.2.js"></script>
+		<script src="../style/jQuery/jquery-ui.js"></script>
+		<link href = "../style/css/bootstrap/css/bootstrap.min.css" rel = "stylesheet">
+		<link rel="stylesheet"type="text/css"href="../style/css/confstyle.css"/>
+		<script src="../style/jQuery/jquery-ui-timepicker-0.3.1/jquery.ui.timepicker.js"></script>
+		<link href = "../style/jQuery/jquery-ui-timepicker-0.3.1/jquery.ui.timepicker.css" rel = "stylesheet">
+		<script src="ctrpan.js" defer></script>
+
+	</head>
+
+	<body>
+	
+	<div id='axis_legend'>
+		<table>
+			<tr>
+				<td id= 'x_Axis'></td>
+				<td>X Axis</td>
+			</tr>
+			<tr>
+				<td id = 'y_Axis'></td>
+                <td>Y Axis</td>
+            </tr>
+			<tr>
+                <td id = 'z_Axis'></td>
+                <td>Z Axis</td>
+            </tr>
+		</table>
+	</div>
+
+	<div id='settings'>
+		<div id = "sett_title">Settings</div>
+		<div id ='updwn'><button id = 'chlBtn' class = 'btn dflt_cstm_btn'>HIDE MENU</button></div>
+		<div id ='main_content'>
+		<input id = 'flow_date' type = 'hidden' value = '%s'>
+		<div>
+	        	<h4> File Upload </h4>
+				<div align="left" <p>Flow Date:</p> <input type="text" name = "fecha" placeholder='Click to set date' id="datepicker" size = "17" maxlength = "10"/>
+                <p>Time: </p><input type = "text" name = "hora" placeholder = 'Click to set time' id = "timepicker"/>
+				<h4>Filter Connections</h4>
+				<div id = "add_opt">	
+					<div id = 's_em' class="alert-error e_alert"></div>
+					<div id='src_inp'>
+						<div id = 's_ip_inp'>	
+							<input class = 'input-medium' id = "srcIp" type="text" maxlength="15"
+							placeholder = "Source IP" title = "Field to filter by source IP." >
+						</div>
+						<select id = "src_pre">
+							<option value = "0">/0</option>
+							<option value = "8">/8</option>
+		                			<option value="16">/16</option>
+		                			<option value="24">/24</option>
+		                			<option value="32">/32</option>
+			        		</select>
+					</div>
+					<div id = 'd_em' class="alert-error e_alert"></div>
+					<div id = 'dst_inp'>
+						<div id ='d_ip_inp'>
+							<input class = 'input-medium' id = "dstIp" type="text" maxlength="15" 
+							placeholder = "Destination IP" title = "Field to filter by destination IP.">
+						</div>
+						<select id = "dst_pre">
+							<option value = "0">/0</option>
+							<option value = "8">/8</option>
+		                			<option value="16">/16</option>
+		                			<option value="24">/24</option>
+		                			<option value="32">/32</option>
+			        		</select>
+					</div>
+				</div>
+				<h5>Threshold</h5>
+	            <div id='th'>
+	            <select id='opt'>
+	                <option value='octets'>Octets</option>
+	                <option value='packets'>Packets</option>
+	            </select>
+	                <input type='text' id ='threshold_size' placeholder='Size' class='input-small'>
+	                <select id='unit'>
+	                    <option value='1024'>KB</option>
+	                    <option value='1048576'>MB</option>
+	                    <option value='1073741824'>GB</option>
+	                </select>
+	            </div
+			</div>
+			<button id = 'dsp_btn' class = 'btn dflt_cstm_btn' type="submit" name="button"  marginheight = "0px"
+                		onClick = "this.disabled='disabled';dspData(1);this.disabled=false;"; >Display</button>
+			<button type = "button" class = 'btn dflt_cstm_btn' id = "second_menu_btn" align = "left" ><b>Axis Colors</b></font></button>
+			<div id ='axis_menu'>
+				<span>X:</span>
+				<select name="X_COLOR" id = "x_color_id" onchange = "renderCube();renderCube();document.getElementById('x_Axis').style.backgroundColor='#'+this.options[this.selectedIndex].value.substring(2,this.options[this.selectedIndex].length)">
+                            		<option value= "0x0" selected>BLACK</option>      
+                                	<option value= "0xFF0033">RED</option> 
+                                	<option value= "0x00FF00">GREEN</option>
+                                	<option value="0x0000FF">BLUE</option>
+					<option value="0x996600">BROWN</option>
+                                	<option value="0X660000">WINE</option>
+                                	<option value="0xFFFF00">YELLOW</option>
+					<option value="0xFF9900">ORANGE</option>
+                        	</select><br>
+				<span>Y:</span>
+				<select name="Y_COLOR" id = "y_color_id" onchange = "renderCube();renderCube();document.getElementById('y_Axis').style.backgroundColor='#'+this.options[this.selectedIndex].value.substring(2,this.options[this.selectedIndex].length)">
+                                	<option value= "0x0" selected>BLACK</option>      
+                                	<option value= "0xFF0033">RED</option> 
+                                	<option value= "0x00FF00">GREEN</option>
+                                	<option value="0x0000FF">BLUE</option>
+                                	<option value="0x996600">BROWN</option>
+                                	<option value="0X660000">WINE</option>
+                                	<option value="0xFFFF00">YELLOW</option>
+                                	<option value="0xFF9900">ORANGE</option>
+                        	</select><br>
+				<span>Z:</span>
+				<select name="Z_COLOR" id = "z_color_id" onchange = "renderCube();document.getElementById('z_Axis').style.backgroundColor='#'+this.options[this.selectedIndex].value.substring(2,this.options[this.selectedIndex].length)">
+                        		<option value= "0x0" selected>BLACK</option>      
+                                	<option value= "0xFF0033">RED</option> 
+                        		<option value= "0x00FF00">GREEN</option>
+                                	<option value="0x0000FF">BLUE</option>
+                                	<option value="0x996600">BROWN</option>
+                                	<option value="0X660000">WINE</option>
+                                	<option value="0xFFFF00">YELLOW</option>
+                                	<option value="0xFF9900">ORANGE</option>	    	
+				</select>	
+			</div>	
+		</div>
+	</div>
+</div>
+	<div id ='aut_cmpl'></div>
+</body>
+</html>

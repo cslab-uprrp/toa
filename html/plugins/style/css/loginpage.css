@@ -1,0 +1,8 @@
+form {position:relative;}
+#main_content {
+	width:100%;
+}
+#log_form {
+	display:inline-block;
+	float:left;
+}

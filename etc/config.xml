@@ -1,0 +1,33 @@
+
+<!-- Warning do not leave spaces in between tags and the data, it will count as part of the data string -->
+<config>
+        <database>
+
+            <name>flows_oct</name>
+
+            <auth>
+
+                <user>root</user>
+
+                <passwd>rootitg</passwd>
+
+            </auth>
+
+        </database>
+
+
+
+
+        <logs><path>/home/eric</path></logs>
+
+        <flows><path>/CassandraVol/Flows/</path></flows>
+
+        <graphs><path>/home/eric/public_html/toa/public_html</path></graphs>
+
+        <crontime><time>300</time></crontime>
+
+	<oldesttime><time>1</time></oldesttime>
+
+	<toapath><path>/home/eric/public_html/toa</path></toapath> 
+    </config>
+	

@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Graph Visualization</title>
+
+<link href = "../style/jQuery/jquery-ui-timepicker-0.3.1/jquery.ui.timepicker.css" 
+	rel = "stylesheet">
+	<script language="javascript" type="text/javascript" src="../js/jit-yc.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css">
+	<script src="../style/jQuery/jquery-1.8.2.js"></script>
+    <script src="../style/jQuery/jquery-ui.js"></script>
+	<link type="text/css" href="../style/css/base.css" rel="stylesheet">
+	<link type="text/css" href="../style/css/ForceDirected.css" rel="stylesheet">	
+	<script language="javascript" type="text/javascript" src="time_graph.js"></script>
+	<script src="../style/jQuery/jquery-ui-timepicker-0.3.1/jquery.ui.timepicker.js"></script>
+	<link href = "../style/jQuery/jquery-ui-timepicker-0.3.1/jquery.ui.timepicker.css" 
+	rel = "stylesheet">
+</head>
+
+
+
+<body>
+
+<div id='connlist'>
+	<div id="inner-details"></div>
+</div>
+
+<div id = "c_p" class ='ui-widget-content'>
+	<div id = 'cp_title' class ='titleimg'> <h3>Settings</h3><hr></div>
+	<div id = 'updwn'>
+		
+		<div id ="conn_filt_form">
+			<div id = 'date_input'>
+				<input id = 'flow_date' type = 'hidden' value = '%s'>
+				<label for ='datepicker' class = 'nonselect'>Flow Date:</label>
+				<input type="text" class = 'inp_box global_radius'name = "fecha" placeholder='Click to set date' 
+				id="datepicker" size = "17" maxlength = "10"/>
+				<label for ='timepicker' class = 'nonselect'>Time:</label>
+				<input type = "text" class = 'inp_box global_radius' name = "hora" placeholder = 'Click to set time' id = "timepicker"/>
+			</div>
+			<label class = 'nonselect'>Connections Filter:</label><br></br>
+			<div id = 'fields'>
+				<input class = 'inp_box global_radius' id='srcIp' placeholder ='Source IP' type='text' size='15' maxlength='15'>
+				<select name="menu1" class = 'global_radius' id = "src_pre">
+					<option value = "0">/0</option>
+					<option value = "8">/8</option>
+					<option value="16">/16</option>
+					<option value="24">/24</option>
+					<option value="32">/32</option>
+				</select>
+				<input class = 'inp_box global_radius' id='dstIp' placeholder ='Destination IP' type='text' size='15' maxlength='15'>
+	
+				<select name="menu1" class = 'global_radius' id = "dst_pre">
+					<option value = "0">/0</option>
+					<option value = "8">/8</option>
+					<option value="16">/16</option>
+					<option value="24">/24</option>
+					<option value="32">/32</option>
+				</select>
+			</div>
+			<span> Display first </span> 
+			<input id = 'conn_num' value = "100" class = 'global_radius' type ='text' size = '1' maxlength ='4'/>
+			<span>connections.</span><br><br>
+			<input type="button" name="button" id = "display_button" value="Display" marginheight = "0px" 
+			onclick ="this.disabled = 'disabled';parseData(1);this.disabled = false;" /><br><br>
+		</div>
+	</div>
+</div><br>
+	
+<div id = "container">
+		<div id="left-container">
+			<h2>Force Directed Static Graph</h2> 
+			<div id="id-list"></div>
+		</div>
+		<div id = "center-container"><div id="infovis"></div></div>
+		<div id="log"></div>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,2 @@
+*/5 * * * * /home/eric/public_html/toa/bin/flowdbu.sh /CassandraVol/Flows/ /home/eric/public_html/toa/bin
+0 22 * * * /usr/bin/python /home/eric/public_html/toa/bin/flowsgrapherdaily_pool.py0 22 * * * /usr/bin/python /home/eric/public_html/toa/bin/flowsdbcleaner.py 

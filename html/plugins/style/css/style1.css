@@ -1,0 +1,118 @@
+#settings { position: absolute;width: 225px;right: 4px;top: 50px;overflow-y: auto; }
+#settings > label { clear: both; float: left; margin-top: 6px; margin-right: 10px; width: 107px; }
+
+#settings{
+
+	display:inline;
+
+	float:right;
+
+	background-color:#686868;
+
+	color:#F3E2A9;
+
+	border-top-right-radius:10px;
+
+	border-bottom-left-radius:10px;
+
+	margin-right:10px;
+
+	width:325px;	
+
+}
+
+#main_menu{
+
+	margin-top:10px;
+
+	margin-bottom:20px;
+
+	text-align:center;
+
+}
+
+#main_content{
+
+	margin-left:40px;
+
+}
+
+#id_sub_button{
+
+	margin-right:25px;
+
+	background-color:#F3E2A9;
+
+	border:0px;
+
+	color:#686868;
+
+}
+/*
+#id_sub_button:hover {
+
+	background-color:#2e2e2e;
+
+	color:#F3E2A9;
+
+}
+
+#second_menu:hover {
+
+        background-color:#2e2e2e;
+
+        color:#F3E2A9;
+
+}
+*/
+#second_menu{
+
+	border-radius:5px;
+
+	background-color:#F3E2A9;
+
+	color:#686868;
+
+	border:0px;
+
+	font-weight:0px;
+
+}
+
+#axis_menu b{
+
+	margin-right:5px;
+
+}
+
+#axis_menu input{
+
+	border-radius:5px;
+
+        background-color:#F3E2A9;
+
+        color:#686868;
+
+        border:0px;
+
+        font-weight:0px;
+
+	margin-top:15px;
+
+	float:right;
+
+	margin-right:30px;
+
+	margin-bottom:40px;
+
+}
+
+div canvas{
+
+	display:inline;
+	
+	float:left;
+
+	width:80%;
+
+}
