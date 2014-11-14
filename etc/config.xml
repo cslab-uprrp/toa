@@ -1,0 +1,33 @@
+
+<!-- Warning do not leave spaces in between tags and the data, it will count as part of the data string -->
+<config>
+        <database>
+
+            <name></name>
+
+            <auth>
+
+                <user></user>
+
+                <passwd></passwd>
+
+            </auth>
+
+        </database>
+
+
+
+
+        <logs><path></path></logs>
+
+        <flows><path></path></flows>
+
+        <graphs><path></path></graphs>
+
+        <crontime><time></time></crontime>
+
+	<oldesttime><time></time></oldesttime>
+
+	<toapath><path></path></toapath> 
+    </config>
+	
