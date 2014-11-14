@@ -6,7 +6,7 @@ Toa is a web based NetFlow data network monitoring system (NMS). Toa consists of
 
 ---
 
-# Installation 
+# Manual Installation 
 
 Following this installation instructions you will install Toa in user account toa.
 
@@ -106,19 +106,58 @@ Exit mysql and in the terminal run the following command to create all the toa t
 mysql -u toa -p toa < ~/db/flowsschema.sql
 ```
 
+### The crontab
 
+You need to add two lines to your crontab to run the parser and grapher.
+
+To enter the crontab run the following command:
+
+``` 
+crontab -e
+```
+
+Add the following lines:
+```
+*/5 * * * * $HOME/bin/flowdbu.sh
+0 22 * * * python $HOME/bin/flowsgrapherdaily_pool.py
+```
+
+### Edit configuration file
+
+### Apache configuration 
+
+Make sure that User directories are enable by commenting the line in your apache configuration file:
+
+```UserDir disabled```
+
+and uncomment the line:
+
+```UserDir public_html```
+
+Then in the user dir configuration make sure the ExecCGI Options is added.  Your user directory configuration should look like the following:
+```
+<Directory /home/*/public_html>
+    AllowOverride FileInfo AuthConfig Limit
+    Options MultiViews Indexes SymLinksIfOwnerMatch IncludesNoExec ExecCGI
+    <Limit GET POST OPTIONS>
+        Order allow,deny
+        Allow from all
+    </Limit>
+    <LimitExcept GET POST OPTIONS>
+        Order deny,allow
+        Deny from all
+    </LimitExcept>
+</Directory>
+```
 
 
 ---
 
-Main developers
+##### Main developers:
 
-Jose R. Ortiz-Ubarri
-
-Albert Maldonado
-
-Eric Santos
-
-Jhensen Grullon
+Jose R. Ortiz-Ubarri<br>
+Albert Maldonado<br>
+Eric Santos<br>
+Jhensen Grullon<br>
 
 
