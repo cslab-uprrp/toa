@@ -6,9 +6,24 @@ Toa is a web based NetFlow data network monitoring system (NMS). Toa consists of
 
 ---
 
-# Manual Installation 
+#Installation
 
-Following this installation instructions you will install Toa in user account toa.
+Following are two installation instructions to get Toa working in your linux server: 
+
+* Automatic
+* Manual installation
+
+You may try the Automatic installation first and if something fails then follow the manual installation. 
+
+In order to get Toa working you need to create an user for the installation, say user toa.  If you don't know how to create an user skip to the step Create user toa in the manual installation.
+
+The following are prerequisites must be installed to have toa working in your server:
+
+* flowtools
+* py-flowtools
+* mysql
+* python
+* python-MySQL
 
 ### Create user toa
 
@@ -93,14 +108,35 @@ create database toa;
 
 Create a user that can access the toa database: (please make sure to change the password in the command bellow)
 ```
-grant all privileges on toa.* to ‘toa’@’localhost’ identified by 'yourpassword';
+create user 'toa'@'localhost' identified by 'yourpassword';
+grant all on toa.* to 'toa'@'localhost' ;
 ```
 Before quiting the database run the following command to make sure you can use the new user.
 ```
 flush privileges ;
 ```
 
-Exit mysql and in the terminal run the following command to create all the toa tables.
+## Automatic installation
+
+Move to the bin directory:
+
+```
+cd bin
+```
+
+and run the installation script, then follow the instructions.
+
+```
+python install.py
+```
+
+## Manual Installation 
+
+Following this installation instructions you will install Toa in user account toa.
+
+### Add database tables to the MySQL database
+
+In the terminal run the following command to create all the toa tables.
 
 ```
 mysql -u toa -p toa < ~/db/flowsschema.sql
