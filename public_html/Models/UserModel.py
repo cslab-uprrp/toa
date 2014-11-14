@@ -16,48 +16,48 @@ class UserModel:
 
 	def connect(self, name = None, user = None, passwd = None, flows_path = None, graphs_path = None, crontime = None):
 
-		try:	
-		
-			dbinfo = Config()
-		
+		if name and user and passwd:
+                        dbinfo = Config(None, name, user, passwd, flows_path, graphs_path, crontime)
+
+                        try:
+
+                                conn = MySQLdb.connect(user=dbinfo.getUser(), passwd=dbinfo.getPassword(), db=dbinfo.getDBName(), host="localhost")
+
+                                self.cursor = conn.cursor()
+
+                                return True
+
+                        except MySQLdb.Error, e:
+
+                                pass
+
+                                print "Error %d: %s" % (e.args[0],e.args[1])
+
+                                return False
+
+		else:	
 			try:
+				dbinfo = Config()
+		
+				try:
 
-				conn = MySQLdb.connect(user=dbinfo.getUser(), passwd=dbinfo.getPassword(), db=dbinfo.getDBName(), host="localhost")
+					conn = MySQLdb.connect(user=dbinfo.getUser(), passwd=dbinfo.getPassword(), db=dbinfo.getDBName(), host="localhost")
 
-				self.cursor = conn.cursor()
+					self.cursor = conn.cursor()
 
-				return True
+					return True
 
-			except MySQLdb.Error, e:
+				except MySQLdb.Error, e:
 				
-				pass
-                                
-				sys.exit(0)
+					sys.exit(0)
    				
-				print "Error %d: %s" % (e.args[0],e.args[1])
+					print "Error %d: %s" % (e.args[0],e.args[1])
 
-				return False
-
-
-		except:
-
-			dbinfo = Config(None, name, user, passwd, flows_path, graphs_path, crontime)
+					return False
 
 
-			try:
-
-				conn = MySQLdb.connect(user=dbinfo.getUser(), passwd=dbinfo.getPassword(), db=dbinfo.getDBName(), host="localhost")
-
-				self.cursor = conn.cursor()
-
-				return True
-
-			except MySQLdb.Error, e:
-				
-				pass
-   				
-   				print "Error %d: %s" % (e.args[0],e.args[1])
-
+			except:
+				print "ERROR"
    				return False
 
 
@@ -97,7 +97,6 @@ class UserModel:
 			return self.cursor.fetchone()[0]
 
 		except:
-
 			return False
 
 
@@ -146,12 +145,13 @@ class UserModel:
 
 			pasw = bcrypt.hashpw(pasw, '$2a$10$tWEM0OEUvxEyFWJIGaxP2.')
 
-			self.cursor.execute("""INSERT INTO USUARIO (name, phone, passwd, email, staff) VALUES ('%s', '%s', '%s', '%s','%s')"""%(name, phone,pasw,email,staff))
+			self.cursor.execute("""INSERT INTO USUARIO (name, phone, passwd, email, staff) VALUES ('%s', '%s', '%s', '%s',%s)"""%(name, phone,pasw,email,staff))
 
 			return True
 
-		except MySQLdb.Error:
+		except MySQLdb.Error, e:
 
+			print "Error %d: %s" % (e.args[0],e.args[1])
 			return False
 
 	def Delete(self, id):
