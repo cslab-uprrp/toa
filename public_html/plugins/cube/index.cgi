@@ -88,19 +88,19 @@ remote=form.getvalue('remote')
 #print "sid = ",sid
 #print "remote = ",remote
 #we check if the form has the key of the variable filename.
-# if not validate(form): 
+if not validate(form): 
 
-# 	print """
-# <!DOCTYPE html>
-# <html>
-# 	<head></head>
-# 	<body>
-# 		<script language=javascript type=text/javascript>												
-# 			window.location.href='../../';
-# 		</script>
-# 	</body>
-# </html>"""
-# 	exit()
+	print """
+<!DOCTYPE html>
+<html>
+	<head></head>
+	<body>
+		<script language=javascript type=text/javascript>												
+			window.location.href='../../';
+		</script>
+	</body>
+</html>"""
+	exit()
 
 if PARSE != None: PARSE=int(PARSE)
 else: PARSE=0
