@@ -108,7 +108,7 @@ class Config:
 
             else:
 
-                self.dbname = name
+                self.name = name
 
                 self.user = user
 
