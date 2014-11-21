@@ -26,8 +26,8 @@ def createcrontab(flowspath, binpath) :
 	fd = open("../etc/crontab", "w")
 	binpath+='/bin'
 	fd.write("""*/5 * * * * %s/flowdbu.sh %s %s\n""" % (binpath, flowspath, binpath))	
-	fd.write("""0 22 * * * /usr/bin/python %s/flowsgrapherdaily_pool.py\n""" % (binpath))
-	fd.write("""0 22 * * * /usr/bin/python %s/flowsdbcleaner.py \n"""%(binpath) )	
+	fd.write("""0 22 * * * python %s/flowsgrapherdaily_pool.py\n""" % (binpath))
+	fd.write("""0 22 * * * python %s/flowsdbcleaner.py\n"""%(binpath) )	
 	fd.close()
 
 def confirmInput(msg):
@@ -71,35 +71,24 @@ def createconfigfile(DB_USER, DB_PASS, DB_NAME, DB_HOST):
 	configfile="""
 <!-- Warning do not leave spaces in between tags and the data, it will count as part of the data string -->
 <config>
+
+	<!-- database information -->
         <database>
-
             <name>%s</name>
-
             <auth>
-
                 <user>%s</user>
-
                 <passwd>%s</passwd>
-
             </auth>
-
         </database>
 
-
-
-
+	<!-- paths information (replace /home/toa with apropiate home dir) -->
         <logs><path>%s</path></logs>
-
         <flows><path>%s</path></flows>
-
         <graphs><path>%s</path></graphs>
-
         <crontime><time>%s</time></crontime>
-
 	<oldesttime><time>%i</time></oldesttime>
-
 	<toapath><path>%s</path></toapath> 
-    </config>
+</config>
 	""" %(DB_NAME,DB_USER,DB_PASS,logspath,flowpath,graphpath,crontime,oldesttime,toapath)
 
 
