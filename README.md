@@ -13,9 +13,9 @@ Following are two installation instructions to get Toa working in your linux ser
 * [Automatic installation](#automatic-installation)
 * [Manual installation](#manual-installation)
 
-You may try the Automatic installation first and if something fails then follow the manual installation. 
+You may try the automatic installation first and if something fails then follow the manual installation. 
 
-In order to get Toa working you need to create an user for the installation, say user toa.  If you don't know how to create an user skip to the step Create user toa in the manual installation.
+In order to get Toa working you need to create an user for the installation, say user toa.  If you don't know how to create an user skip to the step [Create user toa](#create-user-toa) in the manual installation.
 
 The following are prerequisites must be installed to have toa working in your server:
 
