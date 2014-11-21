@@ -100,7 +100,7 @@ def createconfigfile(DB_USER, DB_PASS, DB_NAME, DB_HOST):
 
 
 def createDB():
-	DB_USER = confirmInput("Enter MySQL User to be use with Toa: ")
+	DB_USER = confirmInput("Enter Toa MySQL User: ")
 	DB_PASS=confirmInput("Enter the password: ")
 	DB_NAME=confirmInput("Enter the database to be used: ")
 	DB_HOST='localhost'
@@ -152,11 +152,11 @@ def createUser():
         	email=raw_input("Enter email: ")
 
 	print "Insert password for user %s" % email
+	print "(at least 8 characters and at least one number, one letter and one unique character)"
 	userpass=getpasswd()
 	user=UserModel()
-	print DB_NAME, DB_USER, DB_PASS
 	if user.connect(DB_NAME,DB_USER, DB_PASS,flowpath,graphpath,crontime):
-		print user.Create('Admin',"55555555555",userpass,email,1)
+		user.Create('Admin',"55555555555",userpass,email,1)
 	else:
         	print "ERROR: Database Connection Error\n"
         	print "Exiting installation with errors"

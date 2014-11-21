@@ -19,9 +19,9 @@ In order to get Toa working you need to create an user for the installation, say
 
 The following are prerequisites must be installed to have toa working in your server:
 
-* flowtools
-* py-flowtools
-* mysql
+* flowtools ([link](https://code.google.com/p/flow-tools/))
+* py-flowtools ([link](https://code.google.com/p/pyflowtools/))
+* MySQL
 * python
 * python-MySQL
 
@@ -72,6 +72,7 @@ When you unzip the master.zip file or clone the **toa** repository there will be
 * bin/
 * etc/
 * db/
+* graphs/
 
 Move each of these directories to you home directory.
 
@@ -82,6 +83,7 @@ mv toa/public_html/ ~/
 mv toa/bin/ ~/
 mv toa/etc/ ~/
 mv toa/db/ ~/
+mv toa/graphs/ ~/
 ```
 
 You must have the following directory structure:
@@ -130,6 +132,52 @@ and run the installation script, then follow the instructions.
 python install.py
 ```
 
+Your installation session will look like the following:
+```
+Enter MySQL User to be use with Toa: toa
+Your selection was toa ok?(y/n)y
+Enter the password: aottoor
+Your selection was aottoor ok?(y/n)y
+Enter the database to be used: toa
+Your selection was toa ok?(y/n)y
+Testing connection to database using toadb...
+Succesfully Connected
+Loading Database Schema...
+Database loaded
+
+Now enter the following information to create the configuration file
+
+Enter path where the Flow files are stored: /path/to/flows/
+Your selection was /path/to/flows/ ok?(y/n)y
+Enter for how many years will Toa keep data in the database before deleting it
+min 1 year,  max 5 years (only int): 1
+Your selection was 1 ok?(y/n)y
+..Done, a file named config.xml was created in directory ../etc/
+
+Generating crontab commands
+..Done, a file named crontab  was created in the ../etc directory.
+Please copy its contents to the crontab (remember to update crontab if any path changes)
+
+Creating user for the web interface.
+Enter your email to be used as user account: user@user.com
+Insert password for user user@user.com
+(at least 8 characters and at least one number, one letter and one unique character)
+Enter a password 
+mypass
+Please confirm password
+mypass
+Done, you are now able to log in as admin using the toa user
+```
+
+There is an important message that you might have skipped and is the part to add the crontab lines that execute the heart of toa.  
+
+```
+Generating crontab commands
+..Done, a file named crontab  was created in the ../etc directory.
+Please copy its contents to the crontab (remember to update crontab if any path changes)
+```
+Click [here](#the-crontab) for instructions on how to copy the contents to the crontab.
+
 ## Manual Installation 
 
 Following this installation instructions you will install Toa in user account toa.
@@ -159,7 +207,35 @@ Add the following lines:
 0 22 * * * python /home/jortiz/bin/flowsdbcleaner.py
 ```
 
+To exit type the Esc key, then the : key, then type wq, and enter.
+
 ### Edit configuration file
+
+Open the configuration file:
+```vi etc/config.xml```
+
+Edit the document such that it looks similar to the configuration but with 
+your database access information, and correct paths (if you changed them during the installation instructions)
+```
+<config>
+        <!-- database information -->
+        <database>
+            <name>toa</name>
+            <auth>
+                <user>toa</user>
+                <passwd>toa</passwd>
+            </auth>
+        </database>
+
+        <!-- paths information (replace /home/toa with apropiate home dir) -->
+        <logs><path>/tmp</path></logs>
+        <flows><path>/home/toa/flows</path></flows>
+        <graphs><path>/home/toa/graphs/</path></graphs>
+        <crontime><time>300</time></crontime>
+        <oldesttime><time>1</time></oldesttime>
+        <toapath><path>/home/toa</path></toapath>
+</config>
+```
 
 ### Apache configuration 
 
@@ -185,6 +261,11 @@ Then in the user dir configuration make sure the ExecCGI Options is added.  Your
         Deny from all
     </LimitExcept>
 </Directory>
+```
+
+Finally point your browser to your toa server domain like:
+```
+http://yourdomain.edu/~toa/
 ```
 
 
