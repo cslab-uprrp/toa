@@ -154,9 +154,8 @@ def createUser():
 	print "Insert password for user %s" % email
 	userpass=getpasswd()
 	user=UserModel()
-	print DB_NAME, DB_USER, DB_PASS
 	if user.connect(DB_NAME,DB_USER, DB_PASS,flowpath,graphpath,crontime):
-		print user.Create('Admin',"55555555555",userpass,email,1)
+		user.Create('Admin',"55555555555",userpass,email,1)
 	else:
         	print "ERROR: Database Connection Error\n"
         	print "Exiting installation with errors"
