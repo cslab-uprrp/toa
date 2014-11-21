@@ -55,33 +55,10 @@ Net2NetModel = Net2NetModel()
 
 ViewModel = ViewModel()
 
-if SessionModel.connect() and UserModel.connect() and Net2NetModel.connect() and ViewModel.connect() and PortModel.connect() and NetworkModel.connect():
+def printpage():
 
-    timestamp = SessionModel.Validate(uid, sid, remote)
-
-    ##################### Init ##########################################
-
-    #################### Validation ####################################
-
-    if((timestamp+5)<=tmstp or timestamp == -1):
-
-        SessionModel.Close(uid, remote)
-
-        del UserModel
-
-        del SessionModel
-
-        del NetworkModel
-
-        del PortModel
-
-        del Net2NetModel
-
-        del ViewModel
-
-        print """<script language=\"JavaScript\">{location.href=\"../../index.cgi\";self.focus();}</script>"""
-
-
+	
+    SessionModel.UpdateTimeStamp(tmstp, uid, remote)
     #################### Validation ####################################
 
     ######################### headers  #########################
@@ -122,7 +99,6 @@ if SessionModel.connect() and UserModel.connect() and Net2NetModel.connect() and
 
     ######################### headers #########################
 
-    SessionModel.UpdateTimeStamp(tmstp, uid, remote)
 
     print "<body>"
 
@@ -496,10 +472,58 @@ if SessionModel.connect() and UserModel.connect() and Net2NetModel.connect() and
     ######################### content  #########################
 
     ######################### Fatality #########################
-
     print "</body>"
 
     print "</html>"
+
+################ main #####################
+
+if SessionModel.connect() and UserModel.connect() and Net2NetModel.connect() and ViewModel.connect() and PortModel.connect() and NetworkModel.connect():
+
+    timestamp = SessionModel.Validate(uid, sid, remote)
+
+    ##################### Init ##########################################
+
+    #################### Validation ####################################
+
+    if((timestamp+5)<=tmstp or timestamp == -1):
+
+        SessionModel.Close(uid, remote)
+
+        del UserModel
+
+        del SessionModel
+
+        del NetworkModel
+
+        del PortModel
+
+        del Net2NetModel
+
+        del ViewModel
+    
+	print "<!DOCTYPE html><html>"
+
+    	print "<head>"
+
+        print """<script language=\"JavaScript\">{location.href=\"../../index.cgi\";self.focus();}</script>"""
+	print """</head></html>"""
+
+    else:
+	printpage()	
+
+	del UserModel
+
+	del SessionModel
+
+	del NetworkModel
+
+	del PortModel
+
+	del Net2NetModel
+
+	del ViewModel
+
 
 else:
 
@@ -507,16 +531,17 @@ else:
 
     print SessionModel.connect() and UserModel.connect() and Net2NetModel.connect() and ViewModel.connect() #and PortModel.connect() and NetworkModel.connect()
 
-del UserModel
+    del UserModel
 
-del SessionModel
+    del SessionModel
 
-del NetworkModel
+    del NetworkModel
 
-del PortModel
+    del PortModel
 
-del Net2NetModel
+    del Net2NetModel
 
-del ViewModel
+    del ViewModel
+
 
 ######################### Fatality #########################

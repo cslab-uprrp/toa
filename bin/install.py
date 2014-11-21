@@ -180,15 +180,9 @@ print """This installer will guide you through the installation of TOA"""
 print """Please follow the instructions carefully"""
 print
 
-DB_USER="toa_in"
-DB_PASS="toa_in"
-DB_NAME="toa_in"
-DB_HOST="localhost"
+DB_USER, DB_PASS, DB_NAME, DB_HOST =createDB()
 
 #DB_USER, DB_PASS, DB_NAME, DB_HOST = createDB()
-print "Success"
-
-print "Creating the configuration file"
 flowpath,graphpath,crontime, toapath=createconfigfile(DB_USER, DB_PASS, DB_NAME, DB_HOST)
 
 print "..Done, a file named config.xml was created in directory ../etc/"
