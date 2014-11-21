@@ -6,10 +6,10 @@ function getApp(flowDate,uid,sid,remote){
 	
 	if (selection == 'cube')
 
-		url = "../../plugins/c/?fromtoa="+flowDate+"&PARSE=0&uid="+uid+"&sid="+sid+"&remote="+remote;
+		url = "../../plugins/cube/?fromtoa="+flowDate+"&PARSE=0&uid="+uid+"&sid="+sid+"&remote="+remote;
 	else if (selection == "graph")
 
-		url = "../../plugins/g/?fromtoa="+flowDate+"&PARSE=0&uid="+uid+"&sid="+sid+"&remote="+remote;
+		url = "../../plugins/graph/?fromtoa="+flowDate+"&PARSE=0&uid="+uid+"&sid="+sid+"&remote="+remote;
 
 	else return ;
 
