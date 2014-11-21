@@ -26,7 +26,7 @@ def createcrontab(flowspath, binpath) :
 	fd = open("../etc/crontab", "w")
 	binpath+='/bin'
 	fd.write("""*/5 * * * * %s/flowdbu.sh %s %s\n""" % (binpath, flowspath, binpath))	
-	fd.write("""0 22 * * * /usr/bin/python %s/flowsgrapherdaily_pool.py""" % (binpath))
+	fd.write("""0 22 * * * /usr/bin/python %s/flowsgrapherdaily_pool.py\n""" % (binpath))
 	fd.write("""0 22 * * * /usr/bin/python %s/flowsdbcleaner.py \n"""%(binpath) )	
 	fd.close()
 
