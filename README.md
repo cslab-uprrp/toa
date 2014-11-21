@@ -10,12 +10,12 @@ Toa is a web based NetFlow data network monitoring system (NMS). Toa consists of
 
 Following are two installation instructions to get Toa working in your linux server: 
 
-* Automatic
-* Manual installation
+* [Automatic installation](#automatic-installation)
+* [Manual installation](#manual-installation)
 
-You may try the Automatic installation first and if something fails then follow the manual installation. 
+You may try the automatic installation first and if something fails then follow the manual installation. 
 
-In order to get Toa working you need to create an user for the installation, say user toa.  If you don't know how to create an user skip to the step Create user toa in the manual installation.
+In order to get Toa working you need to create an user for the installation, say user toa.  If you don't know how to create an user skip to the step [Create user toa](#create-user-toa) in the manual installation.
 
 The following are prerequisites must be installed to have toa working in your server:
 
@@ -73,7 +73,7 @@ When you unzip the master.zip file or clone the **toa** repository there will be
 * etc/
 * db/
 
-Move each of the directories to you home directory.
+Move each of these directories to you home directory.
 
 For example to move public_html to your home directory:
 
@@ -156,6 +156,7 @@ Add the following lines:
 ```
 */5 * * * * $HOME/bin/flowdbu.sh
 0 22 * * * python $HOME/bin/flowsgrapherdaily_pool.py
+0 22 * * * python /home/jortiz/bin/flowsdbcleaner.py
 ```
 
 ### Edit configuration file
