@@ -72,6 +72,7 @@ When you unzip the master.zip file or clone the **toa** repository there will be
 * bin/
 * etc/
 * db/
+* graphs/
 
 Move each of these directories to you home directory.
 
@@ -82,6 +83,7 @@ mv toa/public_html/ ~/
 mv toa/bin/ ~/
 mv toa/etc/ ~/
 mv toa/db/ ~/
+mv toa/graphs/ ~/
 ```
 
 You must have the following directory structure:
