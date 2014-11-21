@@ -48,8 +48,8 @@ def validate(form):
 	else:
 		return 0
 
-def  printgraphs(admin,graph,type,w,h,divid,filter=None):
-
+def  printgraphs(admin,graph,type,w,h,divid,filter=None, uid=0, sid=0, remote=0):
+	
 
    file=open(graph,'r')
    graphdata=file.read()
@@ -151,18 +151,18 @@ def getviews(admin,type,filter,entity,h,w,portlabel,tolabel,label,views):
 		path=path[0] 
 		if re.match('(([a-zA-Z0-9]|-|_)+_1(d|m|a|w)(net|pak|flw).js|([a-zA-Z0-9]|-|_)+_([a-zA-Z0-9]|-|_)+_1(d|m|a|w)(net|pak|flw).js|([a-zA-Z0-9]|-|_)+-p([a-zA-Z0-9]|-|_)+_1(d|m|a|w)(net|pak|flw).js)$',path)!=None:
 			divid='view%s'%(i+1)
-			response+='#graph\n\n'+ printgraphs(admin,GRAPH_PATH+path,'net',w,h,divid)
+			response+='#graph\n\n'+ printgraphs(admin,GRAPH_PATH+path,'net',w,h,divid, None, uid, sid, remote)
 		
 		elif re.match('(([a-zA-Z0-9]|-|_)+_1(d|m|a|w)cpl.js|([a-zA-Z0-9]|-|_)+_([a-zA-Z0-9]|-|_)+_1(d|m|a|w)cpl.js|([a-zA-Z0-9]|-|_)+-p([a-zA-Z0-9]|-|_)+_1(d|m|a|w)cpl.js)$',path)!=None:
 
 			divid='view%s'%(i+1)
-			response+='#graph\n\n'+  printgraphs(admin,GRAPH_PATH+path,'cpl',w,h,divid)
+			response+='#graph\n\n'+  printgraphs(admin,GRAPH_PATH+path,'cpl',w,h,divid, None, uid, sid, remote)
 		else:
 			response+= '#graph ERROR: wrong path %s format for views'%(path)
 		i+=1
 	return response
 #Id, Type (all, pak, flw,col), filter(day,week,month,day), entity(device, port, Net2net),h,w(optional)
-def getGraph(admin,type,filter,entity,h, w,portlabel,tolabel,label):
+def getGraph(admin,type,filter,entity,h, w,portlabel,tolabel,label, uid, sid, remote):
 
 	
    	if h=='default':
@@ -201,12 +201,12 @@ def getGraph(admin,type,filter,entity,h, w,portlabel,tolabel,label):
 		response=""	
 		for i in range(len(types)):
 			divid='viz%s'%(i+1)
-			response+='#graph\n\n'+  printgraphs(admin,graph+types[i]+'.js',types[i],w,h,divid,filter)
+			response+='#graph\n\n'+  printgraphs(admin,graph+types[i]+'.js',types[i],w,h,divid,filter, uid, sid, remote)
 
 	else:
 			graph+=type+'.js'
 		
-			response='#graph\n\n'+  printgraphs(admin,graph,type,w,h,'viz1',filter)
+			response='#graph\n\n'+  printgraphs(admin,graph,type,w,h,'viz1',filter, uid, sid, remote)
 
 
 
@@ -233,6 +233,11 @@ if form.has_key('views') and   form.has_key('label') and form.has_key('type') an
 	paths=views.split("#")
 	
 	admin=validate(form)
+
+       	uid=form.getvalue('uid')
+        sid=form.getvalue('sid')
+        remote=form.getvalue('remote')
+
 	if type=='all' or type=='net' or   type=='pak' or type=='flw' or type=='cpl':
 		if filter == 'day' or filter=='week' or filter=='month' or filter=='year':
 			if entity == 'net2net' or entity == 'port' or entity=='device' or entity=='views':
@@ -248,7 +253,7 @@ if form.has_key('views') and   form.has_key('label') and form.has_key('type') an
 										else:
 											 print 'ERROR: views is not a valid parameter\n'
 									else:
-										 print getGraph(admin,type,filter,entity,h,w,portlabel,tolabel,label)
+										 print getGraph(admin,type,filter,entity,h,w,portlabel,tolabel,label, uid, sid, remote)
 								else:
 									 print 'ERROR: w param is not valid\n'
 							else:
