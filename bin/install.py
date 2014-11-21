@@ -152,6 +152,7 @@ def createUser():
         	email=raw_input("Enter email: ")
 
 	print "Insert password for user %s" % email
+	print "(at least 8 characters and at least one number, one letter and one unique character)"
 	userpass=getpasswd()
 	user=UserModel()
 	if user.connect(DB_NAME,DB_USER, DB_PASS,flowpath,graphpath,crontime):
