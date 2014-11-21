@@ -72,7 +72,7 @@ function getUrl(request_type){
 	}
 
 	else if (request_type==1){
-		return  'index.cgi?srcIp='+srcIp+'&dstIp='+dstIp+'&src_pre='+src_pre+'&dst_pre='+dst_pre+'&time='+time+'&PARSE=1'+'&date='+inp_date+"&thold="+document.getElementById('opt').value+"&tvalue="+document.getElementById('threshold_size').value+'|'+document.getElementById('unit').value;
+		return  'index.cgi?srcIp='+srcIp+'&dstIp='+dstIp+'&src_pre='+src_pre+'&dst_pre='+dst_pre+'&time='+time+'&PARSE=1'+'&date='+inp_date+"&thold="+document.getElementById('opt').value+"&tvalue="+document.getElementById('threshold_size').value+'|'+document.getElementById('unit').value+'&uid='+document.getElementById('uid').value+'&sid='+document.getElementById('sid').value+'&remote='+document.getElementById('remote').value;
 
 	}
 	
