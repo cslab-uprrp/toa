@@ -100,7 +100,7 @@ def createconfigfile(DB_USER, DB_PASS, DB_NAME, DB_HOST):
 
 
 def createDB():
-	DB_USER = confirmInput("Enter MySQL User to be use with Toa: ")
+	DB_USER = confirmInput("Enter Toa MySQL User: ")
 	DB_PASS=confirmInput("Enter the password: ")
 	DB_NAME=confirmInput("Enter the database to be used: ")
 	DB_HOST='localhost'
