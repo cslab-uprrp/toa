@@ -19,9 +19,9 @@ In order to get Toa working you need to create an user for the installation, say
 
 The following are prerequisites must be installed to have toa working in your server:
 
-* flowtools
-* py-flowtools
-* mysql
+* flowtools ([link](https://code.google.com/p/flow-tools/))
+* py-flowtools ([link](https://code.google.com/p/pyflowtools/))
+* MySQL
 * python
 * python-MySQL
 
@@ -160,6 +160,32 @@ Add the following lines:
 ```
 
 ### Edit configuration file
+
+Open the configuration file:
+```vi etc/config.xml```
+
+Edit the document such that it looks similar to the configuration but with 
+your database access information, and correct paths (if you changed them during the installation instructions)
+```
+<config>
+        <!-- database information -->
+        <database>
+            <name>toa</name>
+            <auth>
+                <user>toa</user>
+                <passwd>toa</passwd>
+            </auth>
+        </database>
+
+        <!-- paths information (replace /home/toa with apropiate home dir) -->
+        <logs><path>/tmp</path></logs>
+        <flows><path>/home/toa/flows</path></flows>
+        <graphs><path>/home/toa/graphs/</path></graphs>
+        <crontime><time>300</time></crontime>
+        <oldesttime><time>1</time></oldesttime>
+        <toapath><path>/home/toa</path></toapath>
+</config>
+```
 
 ### Apache configuration 
 
