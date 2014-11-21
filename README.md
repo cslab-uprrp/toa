@@ -263,6 +263,11 @@ Then in the user dir configuration make sure the ExecCGI Options is added.  Your
 </Directory>
 ```
 
+Finally point your browser to your toa server domain like:
+```
+http://yourdomain.edu/~toa/
+```
+
 
 ---
 
