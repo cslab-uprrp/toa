@@ -168,7 +168,7 @@ if SessionModel.connect() and UserModel.connect() and Net2NetModel.connect() and
       
     print "<li><a tabindex='-1' href='#'>Reset Password</a></li>"
 
-    print "<li><a tabindex='-1' href='#'>Add Account</a></li>"
+    print "<li><a tabindex='-1' href='AddAccount.cgi?uid=%s&sid=%s&remote=%s'>Add Account</a></li>"%(uid, sid, remote)
 
     print "<li><a tabindex='-1' href='../../Controllers/Logout.cgi?uid=%s&sid=%s&remote=%s'>Logout</a></li>"%(uid, sid, remote)
 

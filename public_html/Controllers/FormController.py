@@ -460,3 +460,152 @@ def EditViewForm(uid, sid, remote, graphs, ViewName, view_graphs, gnum):
 
 
 
+def AddAccountForm(uid, sid, remote, errors, pastInfo=None):
+
+        print "<form action='../../Controllers/AddAccount.cgi' method='POST'>"
+
+        print "<center><div class='row'>"
+
+        print "<div class='col-md-3 col-md-offset-3'>"
+
+        print "<div class='input-group input-group-lg'>"
+
+        print "<span class='input-group-addon'><i class='glyphicon glyphicon-user'></i></span>"
+
+	if not pastInfo == None:
+
+        	print "<input class='form-control' type='text' name='Name' value='%s' placeholder='Full Name'/>"%pastInfo["name"]
+
+	else:
+
+		print "<input class='form-control' type='text' name='Name' value='' placeholder='Full Name'/>"
+
+        print "</div>"
+
+        print "</div>"
+
+        print "<div class='col-md-3'>"
+
+        print "<div class='input-group input-group-lg'>"
+
+	print "<span class='input-group-addon'><i class='glyphicon glyphicon-envelope'></i></span>"
+
+	if not pastInfo == None:
+
+		print "<input class='form-control' type='text' name='Email' value='%s' placeholder='Email'/>"%pastInfo["email"]
+
+	else:
+
+		print "<input class='form-control' type='text' name='Email' value='' placeholder='Email'/>"
+
+        print "</div>"
+
+        print "</div>"
+
+        print "</div>"
+
+        print "<br>"
+
+        print "<div class='row'>"
+
+        print "<div class='col-md-3 col-md-offset-3'>"
+
+        print "<div class='input-group input-group-lg'>"
+
+        print "<span class='input-group-addon'><i class='glyphicon glyphicon-phone'></i></span>"
+
+	if not pastInfo == None:
+
+        	print "<input class='form-control' type='text' name='Phone' value='%s' placeholder='Phone Number'/>"%pastInfo["phone"]
+
+	else:
+
+		print "<input class='form-control' type='text' name='Phone' value='' placeholder='Phone Number'/>"
+
+        print "</div>"
+
+        print "</div>"
+
+        print "<div class='col-md-3'>"
+
+        print "<div class='input-group input-group-lg'>"
+
+        print "<span class='input-group-addon'><i class='glyphicon glyphicon-star'></i></span>"
+
+	print "<select class='form-control' name='Staff'>"
+
+	print "<option value='0'>Normal</option><option value='1'>Admin</option>"
+
+	print "</select>"
+
+        print "</div></div></div>"
+
+        print "<br>"
+
+        print "<div class='row'>"
+
+        print "<div class='col-md-3 col-md-offset-3'>"
+
+        print "<div class='input-group input-group-lg'>"
+
+        print "<span class='input-group-addon'><i class='glyphicon glyphicon-lock'></i></span>"
+
+        print "<input class='form-control' type='password' name='Password' value='' placeholder='Password'/>"
+
+        print "</div></div>"
+
+        print "<div class='col-md-3'>"
+
+        print "<div class='input-group input-group-lg'>"
+
+        print "<span class='input-group-addon'><i class='glyphicon glyphicon-lock'></i></span>"
+
+        print "<input class='form-control' type='password' name='CPassword' value='' placeholder='Confirm Password'/>"
+
+        print "</div></div></div>"
+
+        print "<br>"
+
+        print "<div class='row'>"
+
+        print "<div class='col-md-4 col-md-offset-3'>"
+
+	errors = errors.strip("[]''").split(",")
+
+        if "Account Added." in errors:
+
+                print "<p class='text-success'>"
+
+                for error in errors:
+
+                        if error != None:
+
+                                print error.strip('\'\'')
+
+                print "</p>"
+
+        elif len(errors) > 0:
+
+                print "<p class='text-danger'>"
+
+                for error in errors:
+
+                        print error.strip("''")
+
+                print "</p>"
+
+        print "</div>"
+
+        print "<div class='col-md-2'>"
+
+        print "<button class='btn btn-default btn-lg pull-right add-device-button'>Add Account</button>"
+
+        print "</div></div>"
+
+        print "<input type='hidden' name='uid' value='%s'/>"%(uid)
+
+        print "<input type='hidden' name='sid' value='%s'/>"%(sid)
+
+        print "<input type='hidden' name='remote' value='%s'/>"%(remote)
+
+        print "</form>"
