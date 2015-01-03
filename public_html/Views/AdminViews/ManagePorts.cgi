@@ -404,7 +404,17 @@ if SessionModel.connect() and UserModel.connect() and NetworkModel.connect() and
 
     for p in Ports:
 
-        print "<div class='col-md-3 col-md-offset-2'><div class='thumbnail'><h3>%s <a class='text-danger' href='../../Controllers/RemovePort.cgi?nid=%s&uid=%s&sid=%s&remote=%s&port=%s'><i class='glyphicon glyphicon-remove'></i></a></h3></div></div>"%(p[1], nid, uid, sid, remote, p[0])
+	print "<div class='col-md-2'>"
+
+	print "<div class='panel panel-default'>"
+  
+	print "<div class='panel-heading'>%s</div>"%(p[1])
+
+  	print "<div class='panel-body'>"
+
+	print "<a class='text-danger' href='../../Controllers/RemovePort.cgi?nid=%s&uid=%s&sid=%s&remote=%s&port=%s'>Remove <i class='glyphicon glyphicon-trash'></i></a>"%(nid, uid, sid, remote, p[0])
+
+	print "</div></div></div>"
 
     ######################### content  #########################
 
