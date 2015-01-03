@@ -124,7 +124,7 @@ DROP TABLE IF EXISTS `SESION`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `SESION` (
-  `sid` varchar(30) NOT NULL DEFAULT '',
+  `sid` varchar(40) NOT NULL DEFAULT '',
   `uid` int(11) NOT NULL DEFAULT '0',
   `lasttime` varchar(20) NOT NULL DEFAULT '',
   `remote_addr` varchar(50) DEFAULT NULL
