@@ -6,7 +6,7 @@ import cgi
 import sys 
 import os
 import cgitb
-import datetime
+import time
 import urllib, hashlib
 import sys
 sys.path.append("../../Models")
@@ -39,9 +39,7 @@ sid = form.getvalue("sid")
 
 remote = form.getvalue("remote")
 
-now = datetime.datetime.now()#generate the TimeStamp
-
-tmstp = now.minute#converting the TimeStamp to string   
+now = time.time()#generate the TimeStamp
 
 SessionModel = SessionModel()
 
@@ -58,7 +56,7 @@ ViewModel = ViewModel()
 def printpage():
 
 	
-    SessionModel.UpdateTimeStamp(tmstp, uid, remote)
+    SessionModel.UpdateTimeStamp(now, uid, remote)
     #################### Validation ####################################
 
     ######################### headers  #########################
@@ -132,7 +130,7 @@ def printpage():
       
     print "<li><a tabindex='-1' href='#'>Reset Password</a></li>"
 
-    print "<li><a tabindex='-1' href='AddAccount.cgi?uid=%s&sid=%s&remote=%s'>Add Account</a></li>" %(uid, sid, remote) 
+    print "<li><a tabindex='-1' href='Account.cgi?uid=%s&sid=%s&remote=%s'>Add Account</a></li>" %(uid, sid, remote) 
 
     print "<li><a tabindex='-1' href='../../Controllers/Logout.cgi?uid=%s&sid=%s&remote=%s'>Logout</a></li>"%(uid, sid, remote)
 
@@ -480,13 +478,13 @@ def printpage():
 
 if SessionModel.connect() and UserModel.connect() and Net2NetModel.connect() and ViewModel.connect() and PortModel.connect() and NetworkModel.connect():
 
-    timestamp = SessionModel.Validate(uid, sid, remote)
+    timestamp = SessionModel.Validate(uid, sid, remote, now)
 
     ##################### Init ##########################################
 
     #################### Validation ####################################
 
-    if((timestamp+5)<=tmstp or timestamp == -1):
+    if not timestamp:
 
         SessionModel.Close(uid, remote)
 

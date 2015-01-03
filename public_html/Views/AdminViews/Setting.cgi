@@ -6,7 +6,7 @@ import cgi
 import sys 
 import os
 import cgitb
-import datetime
+import time
 import urllib, hashlib
 import sys
 sys.path.append("../../Models")
@@ -36,7 +36,7 @@ sid = form.getvalue("sid")
 
 remote = form.getvalue("remote")
 
-now = datetime.datetime.now()#generate the TimeStamp
+now = time.time() #generate the TimeStamp
 
 tmstp = now.minute#converting the TimeStamp to string   
 
@@ -46,7 +46,7 @@ NetworkModel = NetworkModel()
 
 UserModel = UserModel()
 
-timestamp = SessionModel.Validate(uid, sid, remote)
+timestamp = SessionModel.Validate(uid, sid, remote, now)
 
 if form.has_key("iframe_display"):
         
@@ -58,7 +58,7 @@ else:
 
 ##################### Init ##########################################
 
-if((timestamp+5)<=tmstp or timestamp == -1):
+if not timestamp:
 
     SessionModel.Close(uid, remote)
 
@@ -70,7 +70,7 @@ if((timestamp+5)<=tmstp or timestamp == -1):
 
     print """<script language=\"JavaScript\">{location.href=\"../../index.cgi\";self.focus();}</script>"""
 
-SessionModel.UpdateTimeStamp(tmstp, uid, remote)
+SessionModel.UpdateTimeStamp(now, uid, remote)
 
 print """        
 	

@@ -6,7 +6,7 @@ import cgi
 import sys 
 import os
 import cgitb
-import datetime
+import time
 import urllib, hashlib
 import sys
 sys.path.append("../../Models")
@@ -16,7 +16,6 @@ from PortModel import PortModel
 from Net2NetModel import Net2NetModel
 from ViewModel import ViewModel
 from UserModel import UserModel
-from GraphModel import GraphModel
 sys.path.append("../../Controllers")
 from FormController import *
 
@@ -36,6 +35,8 @@ uid = form.getvalue("uid")
 
 uid = str(uid).strip("(),L")
 
+#uid = int(uid)
+
 sid = form.getvalue("sid")
 
 remote = form.getvalue("remote")
@@ -48,17 +49,7 @@ else:
 
     errors = '[]'
 
-if form.has_key("pastInfo"):
-
-	pastInfo = form.getvalue("pastInfo")
-
-else:
-
-	pastInfo = None
-
-now = datetime.datetime.now()#generate the TimeStamp
-
-tmstp = now.minute#converting the TimeStamp to string   
+now = time.time() #generate the TimeStamp
 
 SessionModel = SessionModel()
 
@@ -72,15 +63,13 @@ Net2NetModel = Net2NetModel()
 
 ViewModel = ViewModel()
 
-GraphModel = GraphModel()
+if SessionModel.connect() and UserModel.connect() and Net2NetModel.connect() and ViewModel.connect() and PortModel.connect() and NetworkModel.connect():
 
-if SessionModel.connect() and UserModel.connect() and Net2NetModel.connect() and ViewModel.connect() and PortModel.connect() and NetworkModel.connect() and GraphModel.connect():
-
-    timestamp = SessionModel.Validate(uid, sid, remote)
+    timestamp = SessionModel.Validate(uid, sid, remote, now)
 
     ##################### Init ##########################################
 
-    if((timestamp+5)<=tmstp or timestamp == -1):
+    if not timestamp:
 
         SessionModel.Close(uid, remote)
 
@@ -92,15 +81,13 @@ if SessionModel.connect() and UserModel.connect() and Net2NetModel.connect() and
 
         del PortModel
 
-        del GraphModel
-
         del Net2NetModel
 
         del ViewModel
 
         print """<script language=\"JavaScript\">{location.href=\"../../index.cgi\";self.focus();}</script>"""
 
-    SessionModel.UpdateTimeStamp(tmstp, uid, remote)
+    SessionModel.UpdateTimeStamp(now, uid, remote)
 
     print "<!DOCTYPE html><html>"
 
@@ -128,19 +115,13 @@ if SessionModel.connect() and UserModel.connect() and Net2NetModel.connect() and
 
     print """<script src="../../Controllers/MenuController.js"></script>"""
 
-    print """<script src="../../Controllers/PluginController.js"></script>"""
-
-    print """<script src="../../Controllers/Top100Controller.js"></script>"""
-
     print "<script type='text/javascript'>google.load('visualization', '1', {packages: ['corechart']});</script>"
-
-    print "<script>var elem = document.getElementsByClassName('popover');for(i=0; i<elem.length;i++){elem[i].popover();}</script>"
 
     print "</head>"
 
     ######################### headers #########################
 
-    SessionModel.UpdateTimeStamp(tmstp, uid, remote)
+    SessionModel.UpdateTimeStamp(now, uid, remote)
 
     print "<body>"
 
@@ -198,11 +179,19 @@ if SessionModel.connect() and UserModel.connect() and Net2NetModel.connect() and
             
     print "<div class='modal-dialog viewer'>"
 
+    #print "<div class='modal-header viewer-header'>"
+        
+    #print "<h1 class='modal-title'></h1>"
+      
+    #print "</div>"
+                
     print "<div class='modal-content viewer-body'>"
       
     print "<div class='modal-body modal-no-padding' >"
 
     print "<div class='container-fluid'>"
+
+    #print "<button type='button' class='close viewer-expand' aria-hidden='true'><i class='glyphicon glyphicon-chevron-down'></i></button>"
 
     print "<button onclick='CleanViewer();' type='button' class='close viewer-close' data-dismiss='modal' aria-hidden='true'><i class='glyphicon glyphicon-remove'></i></button>"
 
@@ -218,7 +207,7 @@ if SessionModel.connect() and UserModel.connect() and Net2NetModel.connect() and
 
     print "</div>"
 
-    ######################### add view form  #########################
+    ######################### viewer  #########################
 
     ######################### custom query form  #########################
 
@@ -289,45 +278,27 @@ if SessionModel.connect() and UserModel.connect() and Net2NetModel.connect() and
     ######################### Add Graph to View ##########################
 
     print "<div class='modal fade' id='AddGraphModal'>"
-
+            
     print "<div class='modal-dialog'>"
-
+                
     print "<div class='modal-content'>"
-
+                
     print "<div class='modal-header'>"
-
+        
     print "<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>"
-
+        
     print "<h4 class='modal-title'>Add Graph to a View</h4>"
-
+      
     print "</div>"
-
+      
     print "<div class='modal-body'>"
 
-    views = ViewModel.GetAll(uid)
-
-    print "<div class='row'>"
-
-    print "<div class='col-md-7 col-md-offset-1'>"
-
-    print "<select class='form-control form-control-lg' id='views'>"
-
-    for v in views:
-
-        print "<option value='%s'>%s</option>"%(v[0], v[1])
-
-    print "</select>"
-
-    print "</div><div class='col-md-3'>"
-
-    print "<button type='button' class='btn btn-default btn-lg btn-feature-bar pull-right' id='GraphAdder'>Add</button><br><br>"
-
-    print "</div></div>"
-
+    print "<button type='button' class='btn btn-default btn-lg btn-feature-bar pull-right'>Add</button><br><br>"
+      
     print "</div>"
-
+    
     print "</div>"
-
+    
     print "</div>"
 
     print "</div>"
@@ -355,7 +326,7 @@ if SessionModel.connect() and UserModel.connect() and Net2NetModel.connect() and
 
     for device in devices:
 
-	print "<li class='dropdown-submenu'><a href=#Device class='dropdown-hover'>%s</a><ul class='dropdown-menu'><li><a href='#' onclick=\"GraphView('%s', 'all', 'day', 'device', 'default', 'default', 'default', 'default', 1, 'default', '%s', '%s', '%s')\">Interface Graph</a></li>"%(device[1], device[1], uid, sid, remote)
+        print "<li class='dropdown-submenu'><a href=#Device class='dropdown-hover'>%s</a><ul class='dropdown-menu'><li><a href='#' onclick=\"GraphView('%s', 'all', 'day', 'device', 'default', 'default', 'default', 'default', 1)\">Interface Graph</a></li>"%(device[1], device[1])
 
         ports = PortModel.Get(device[0])
 
@@ -364,8 +335,8 @@ if SessionModel.connect() and UserModel.connect() and Net2NetModel.connect() and
             print "<li class='dropdown-submenu'><a href=#Port class='dropdown-hover'>Port Graph</a><ul class='dropdown-menu'>"
 
             for port in ports:
-		
-		print "<li><a href=# onclick=\"GraphView('%s', 'all', 'day', 'port', '%s', 'default', 'default', 'default', 1, 'default', '%s', '%s', '%s')\">%s</a></li>"%(device[1], port[1], uid, sid, remote, port[1])
+
+                print "<li><a href=# onclick=\"GraphView('%s', 'all', 'day', 'port', '%s', 'default', 'default', 'default', 1)\">%s</a></li>"%(device[1], port[1], port[1])
 
             print "</ul></li>"
 
@@ -377,44 +348,9 @@ if SessionModel.connect() and UserModel.connect() and Net2NetModel.connect() and
 
             for net2net in net2nets:
 
-		print "<li><a href=# onclick=\"GraphView('%s', 'all', 'day', 'net2net', 'default', '%s', 'default', 'default', 1, 'default', '%s', '%s', '%s')\">%s</a>"%(device[1],net2net[1], uid, sid, remote, net2net[1])
+                print "<li><a href=# onclick=\"GraphView('%s', 'all', 'day', 'net2net', 'default', '%s', 'default', 'default', 1)\">%s</a>"%(device[1],net2net[1], net2net[1])
 
             print "</ul></li>"
-        
-	print "<li class='dropdown-submenu'><a href=#Top100 class='dropdown-hover'>Top100</a>"
-
-        print "<ul class='dropdown-menu' role='menu'>"
-
-	#### Net Top 1000
-
-	print "<li class='dropdown-submenu'><a class='dropdown-hover'>Network</a>"
-
-        print "<ul class='dropdown-menu' role='menu'>"
-
-        print "<li><a onclick=\"GetTop100('net', 'oct', '%s', '%s', '%s', '%s')\">Octects</a></li>"%(device[0], uid, sid, remote)
-
-        print "<li><a onclick=\"GetTop100('net', 'pak', '%s', '%s', '%s', '%s')\">Packets</a></li>"%(device[0], uid, sid, remote)
-
-        print "<li><a onclick=\"GetTop100('net', 'flow', '%s', '%s', '%s', '%s')\">Flows</a></li>"%(device[0], uid, sid, remote)
-
-        print "</li></ul>"
-
-	 ### Port Top 100
-
-
-        print "<li class='dropdown-submenu'><a class='dropdown-hover'>Port</a>"
-
-        print "<ul class='dropdown-menu' role='menu'>"
-
-        print "<li><a onclick=\"GetTop100('ports', 'oct', '%s','%s','%s','%s')\">Octects</a></li>"%(device[0],uid,sid,remote)
-
-        print "<li><a onclick=\"GetTop100('ports', 'pak', '%s','%s','%s','%s')\">Packets</a></li>"%(device[0],uid,sid,remote)
-
-        print "<li><a onclick=\"GetTop100('ports', 'flow', '%s','%s','%s','%s')\">Flows</a></li>"%(device[0],uid,sid,remote)
-
-        print "</ul></li>"
-
-        print "</ul>"
 
         print "</li></ul>"
 
@@ -432,7 +368,7 @@ if SessionModel.connect() and UserModel.connect() and Net2NetModel.connect() and
 
     for view in views:
 
- 	print "<li><a href=# onclick=\"GraphView('default', 'all', 'day', 'views', 'default', 'default', screen.width/2, screen.height-(screen.height/2), 1, %s)\" data-toggle='modal' data-target='#Viewer'>%s</a></li>"%(view[0], view[1])
+        print "<li><a href=# onclick=\"GraphView('default', 'all', 'day', 'views', 'default', 'default', '900','400', 1, %s)\" data-toggle='modal' data-target='#Viewer'>%s</a></li>"%(view[0], view[1])
 
     print "</ul></div>"
 
@@ -448,17 +384,9 @@ if SessionModel.connect() and UserModel.connect() and Net2NetModel.connect() and
 
     print "<div class='row'>"
 
-    print "<div class='col-md-12 add-view-form'>"
+    print "<div class='col-md-12 add-device-form'>"
 
-    #pInfo = {}
-
-    #for info in pastInfo.strip("{}").split(","):
-
-    #	tmp = info.split(":")
-
-    #	pInfo[tmp[0].strip("'\"\"'")] = tmp[1].strip("'\"\"'")
-
-    AddAccountForm(uid, sid, remote, errors)
+    AddAccountForm(uid, sid, remote, errors.strip('[]').split(','))
 
     print "</div>"
 
@@ -473,8 +401,6 @@ del SessionModel
 del NetworkModel
 
 del PortModel
-
-del GraphModel
 
 del Net2NetModel
 

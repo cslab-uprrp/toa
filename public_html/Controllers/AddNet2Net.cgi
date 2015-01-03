@@ -6,7 +6,7 @@ import cgi
 import sys 
 import os
 import cgitb
-import datetime
+import time
 import urllib, hashlib
 import sys
 sys.path.append("../Models")
@@ -45,9 +45,7 @@ nid = int(nid)
 
 device = form.getvalue("Device")  if form.has_key("Device") else "0"
 
-now = datetime.datetime.now()#generate the TimeStamp
-
-tmstp = now.minute#converting the TimeStamp to string   
+now = time.time()#generate the TimeStamp
 
 SessionModel = SessionModel()
 
@@ -58,9 +56,9 @@ Net2NetModel = Net2NetModel()
 if  SessionModel.connect() and Net2NetModel.connect() and UserModel.connect():
 
 	
-	timestamp = SessionModel.Validate(uid, sid, remote)
+	timestamp = SessionModel.Validate(uid, sid, remote, now)
 
-	if((timestamp+5)<=tmstp or timestamp == -1):
+	if not timestamp:
 
     		SessionModel.Close(uid, remote)
 
@@ -72,7 +70,7 @@ if  SessionModel.connect() and Net2NetModel.connect() and UserModel.connect():
 
     		print """<script language=\"JavaScript\">{location.href=\"../index.cgi\";self.focus();}</script>"""
 
-	SessionModel.UpdateTimeStamp(tmstp, uid, remote)
+	SessionModel.UpdateTimeStamp(now, uid, remote)
 
 	Net2NetModel.Add(nid, device)
 

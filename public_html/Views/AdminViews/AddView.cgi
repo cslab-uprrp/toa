@@ -6,7 +6,7 @@ import cgi
 import sys 
 import os
 import cgitb
-import datetime
+import time
 import urllib, hashlib
 import sys
 sys.path.append("../../Models")
@@ -50,9 +50,7 @@ else:
 
     errors = '[]'
 
-now = datetime.datetime.now()#generate the TimeStamp
-
-tmstp = now.minute#converting the TimeStamp to string   
+now = time.time() #generate the TimeStamp
 
 SessionModel = SessionModel()
 
@@ -70,11 +68,11 @@ GraphModel = GraphModel()
 
 if SessionModel.connect() and UserModel.connect() and Net2NetModel.connect() and ViewModel.connect() and PortModel.connect() and NetworkModel.connect() and GraphModel.connect():
 
-    timestamp = SessionModel.Validate(uid, sid, remote)
+    timestamp = SessionModel.Validate(uid, sid, remote, now)
 
     ##################### Init ##########################################
 
-    if((timestamp+5)<=tmstp or timestamp == -1):
+    if not timestamp:
 
         SessionModel.Close(uid, remote)
 
@@ -94,7 +92,7 @@ if SessionModel.connect() and UserModel.connect() and Net2NetModel.connect() and
 
         print """<script language=\"JavaScript\">{location.href=\"../../index.cgi\";self.focus();}</script>"""
 
-    SessionModel.UpdateTimeStamp(tmstp, uid, remote)
+    SessionModel.UpdateTimeStamp(now, uid, remote)
 
     print "<!DOCTYPE html><html>"
 
@@ -134,7 +132,7 @@ if SessionModel.connect() and UserModel.connect() and Net2NetModel.connect() and
 
     ######################### headers #########################
 
-    SessionModel.UpdateTimeStamp(tmstp, uid, remote)
+    SessionModel.UpdateTimeStamp(now, uid, remote)
 
     print "<body>"
 
@@ -168,7 +166,7 @@ if SessionModel.connect() and UserModel.connect() and Net2NetModel.connect() and
       
     print "<li><a tabindex='-1' href='#'>Reset Password</a></li>"
 
-    print "<li><a tabindex='-1' href='AddAccount.cgi?uid=%s&sid=%s&remote=%s'>Add Account</a></li>"%(uid, sid, remote)
+    print "<li><a tabindex='-1' href='#'>Add Account</a></li>"
 
     print "<li><a tabindex='-1' href='../../Controllers/Logout.cgi?uid=%s&sid=%s&remote=%s'>Logout</a></li>"%(uid, sid, remote)
 

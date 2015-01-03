@@ -6,7 +6,7 @@ import cgi
 import sys 
 import os
 import cgitb
-import datetime
+import time
 import urllib, hashlib
 import sys
 sys.path.append("../Models")
@@ -44,9 +44,7 @@ nid = int(nid)
 
 port = form.getvalue("port")
 
-now = datetime.datetime.now()#generate the TimeStamp
-
-tmstp = now.minute#converting the TimeStamp to string   
+now = time.time()#generate the TimeStamp
 
 SessionModel = SessionModel()
 
@@ -56,9 +54,9 @@ UserModel = UserModel()
 
 if PortModel.connect() and UserModel.connect() and SessionModel.connect():
 
-	timestamp = SessionModel.Validate(uid, sid, remote)
+	timestamp = SessionModel.Validate(uid, sid, remote, now)
 
-	if((timestamp+5)<=tmstp or timestamp == -1):
+	if not timestamp:
 
 	    SessionModel.Close(uid, remote)
 
@@ -70,7 +68,7 @@ if PortModel.connect() and UserModel.connect() and SessionModel.connect():
 
 	    print """<script language=\"JavaScript\">{location.href=\"../index.cgi\";self.focus();}</script>"""
 
-	SessionModel.UpdateTimeStamp(tmstp, uid, remote)
+	SessionModel.UpdateTimeStamp(now, uid, remote)
 
 	PortModel.Remove(nid, port)
 
