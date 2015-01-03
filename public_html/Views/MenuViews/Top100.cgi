@@ -45,7 +45,7 @@ def validate(form):
 
 		if sm.connect():
 
-    			timestamp = sm.Validate(uid, sid, remote, uid)
+    			timestamp = sm.Validate(uid, sid, remote, now)
 
     			if not timestamp:
 
