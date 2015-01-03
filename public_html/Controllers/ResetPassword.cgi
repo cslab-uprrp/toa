@@ -54,7 +54,7 @@ if SessionModel.connect() and UserModel.connect():
 
 	timestamp = SessionModel.Validate(uid, sid, remote)
 
-	if((timestamp+5)<=tmstp or timestamp == -1):
+	if not timestamp:
 
 	    SessionModel.Close(uid, remote)
 
