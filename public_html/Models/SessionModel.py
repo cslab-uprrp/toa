@@ -89,7 +89,7 @@ class SessionModel:
 
 		return self.cursor.fetchone()#fetching the value of the Datestamp of the current user
 
-	def Validate(self, uid, sid, remote):
+	def Validate(self, uid, sid, remote, now):
 
 		self.cursor.execute("SELECT lasttime from SESION where uid = '%s' and sid = '%s' and remote_addr = '%s'"%(uid, sid, remote))
 
@@ -97,12 +97,17 @@ class SessionModel:
 
 		if(status == None):
 
-			return -1
+			return 0
 
-		return int(status[0])
+		status = int(float(status[0]))
+
+		if now - status > 10 * 60:
+			return 0
+
+		return 1
 
 	def UpdateTimeStamp(self, date, id, remote):
-
+                date = int(float(date))
 		self.cursor.execute("UPDATE SESION SET lasttime = '%s' WHERE uid = '%s' and remote_addr='%s'"%(date,id,remote))
 
 
