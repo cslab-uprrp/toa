@@ -10,10 +10,9 @@ sys.path.append('../../../bin/')
 from Config import Config
 config=Config()
 FLOWS_LOCATION=config.getFlowsPath()
-import datetime
+import time as mytime
 sys.path.append('../../Models/')
 from SessionModel import SessionModel
-# from time import gmtime,strftime
 
 #We get the input parameters received from frontend.
 form = cgi.FieldStorage()
@@ -50,18 +49,14 @@ def validate(form):
         uid=form.getvalue('uid')
         sid=form.getvalue('sid')
         remote=form.getvalue('remote')
-        now = datetime.datetime.now()#generate the TimeStamp
-
-        tmstp = now.minute#converting the TimeStamp to string
+        now = mytime.time()#generate the TimeStamp
 
         sm = SessionModel()
 
-
         if sm.connect():
 
-            timestamp = sm.Validate(uid, sid, remote)
-            #print "timestamp = ",timestamp
-            if((timestamp+5)<=tmstp or timestamp == -1):
+            timestamp = sm.Validate(uid, sid, remote, now)
+            if not timestamp:
 
                 sm.Close(uid, remote)
 

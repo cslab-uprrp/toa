@@ -38,18 +38,16 @@ def validate(form):
 		uid=form.getvalue('uid')
 		sid=form.getvalue('sid')
 		remote=form.getvalue('remote')
-		now = datetime.now()#generate the TimeStamp
-
-		tmstp = now.minute#converting the TimeStamp to string   
+		now = time.time() # generate the TimeStamp
 
 		sm = SessionModel()
 
 
 		if sm.connect():
 
-    			timestamp = sm.Validate(uid, sid, remote)
+    			timestamp = sm.Validate(uid, sid, remote, now)
 
-    			if((timestamp+5)<=tmstp or timestamp == -1):
+    			if not timestamp:
 
         			sm.Close(uid, remote)
 

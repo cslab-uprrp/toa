@@ -7,7 +7,7 @@ import sys
 import os
 import re
 import cgitb
-import datetime
+import time
 import urllib, hashlib
 import sys
 sys.path.append("../Models")
@@ -41,9 +41,7 @@ view_name = str(form.getvalue("view_name"))
 
 view_description = str(form.getvalue("view_description"))
 
-now = datetime.datetime.now()#generate the TimeStamp
-
-tmstp = now.minute#converting the TimeStamp to string 
+now = time.time()#generate the TimeStamp
 
 validator = [re.compile('[a-zA-Z0-9]+[a-zA-Z0-9\_\-]*$'), re.compile('[a-zA-Z0-9\s\t\n\.]*$')]  
 
@@ -55,9 +53,9 @@ UserModel = UserModel()
 
 if SessionModel.connect() and ViewModel.connect() and UserModel.connect():
 
-	timestamp = SessionModel.Validate(uid, sid, remote)
+	timestamp = SessionModel.Validate(uid, sid, remote, now)
 
-	if((timestamp+5)<=tmstp or timestamp == -1):
+	if not timestamp:
 
 	    SessionModel.Close(uid, remote)
 
@@ -69,7 +67,7 @@ if SessionModel.connect() and ViewModel.connect() and UserModel.connect():
 
 	    print """<script language=\"JavaScript\">{location.href=\"../index.cgi\";self.focus();}</script>"""
 
-	SessionModel.UpdateTimeStamp(tmstp, uid, remote)
+	SessionModel.UpdateTimeStamp(now, uid, remote)
 
 	errors = []
 
