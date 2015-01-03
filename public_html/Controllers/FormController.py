@@ -145,7 +145,7 @@ def EditNetworkForm(nid, device, uid, sid, remote, errors):
 
 	print "<div class='col-md-3'>"
 
-	print "<div class='input-group input-group-lg'>"
+	print "<div class='input-group input-group-lg col-md-12'>"
 
 	print "<select class='form-control' name='Type'>"
 
@@ -304,7 +304,9 @@ def AddNet2NetForm(nid, uid, sid, remote, devices):
 
 	print "<center><form action='../../Controllers/AddNet2Net.cgi' method='post'>"
 
-	print "<select name='Device'>"
+	print "<div class='form-group'><div class='input-group input-group-lg col-md-3'>"
+
+	print "<select class='form-control' name='Device'>"
 
 	for d in devices:
 
@@ -312,7 +314,9 @@ def AddNet2NetForm(nid, uid, sid, remote, devices):
 
 	print "</select>"
 
-	print "<button class='btn btn-inverse' id='add-n2n-button'>Add Net2Net</button></td>"
+	print "</div></div>"
+
+	print "<button class='btn btn-default btn-lg add-device-button' id='add-n2n-button'>Add Net2Net</button></td>"
 
 	print "<input type='hidden' name='nid' value='%s'/>"%(nid) 
 
@@ -328,7 +332,27 @@ def AddNetBlockForm(nid, uid, sid, remote):
 
 	print "<center><form action='../../Controllers/AddBlock.cgi' method='post'>"
 
-	print "<input type='text' name='FIP' value='' placeholder='From (IP Address)'/> <input type='text' name='TIP' value='' placeholder='To (IP Address)'/> <button class='btn btn-inverse' id='add-netblock-button'>Add NetBlock</button>"
+	print "<div class='form-group'><div class='input-group input-group-lg col-md-3'>"
+
+	print "<span class='input-group-addon'><i class='glyphicon glyphicon-cloud-download'></i></span>"
+
+	print "<input type='text' class='form-control' name='FIP' value='' placeholder='From (IP Address)'/>"
+
+	print "</div></div>"
+
+	print "<br>"
+
+	print "<div class='form-group'><div class='input-group input-group-lg col-md-3'>"
+
+	print "<span class='input-group-addon'><i class='glyphicon glyphicon-cloud-upload'></i></span>"
+
+	print "<input class='form-control' type='text' name='TIP' value='' placeholder='To (IP Address)'/>"
+
+	print "</div></div>"
+
+	print "<br>"
+
+	print "<button class='btn btn-default btn-lg add-device-button' id='add-netblock-button'>Add NetBlock</button>"
 
 	print "<input type='hidden' name='nid' value='%s'/>"%(nid) 
 
@@ -338,7 +362,7 @@ def AddNetBlockForm(nid, uid, sid, remote):
 
 	print "<input type='hidden' name='remote' value='%s'/>"%(remote) 
 
-	print "</form><br>"
+	print "</form><br><br>"
 
 
 def AddViewForm(uid, sid, remote, errors):
