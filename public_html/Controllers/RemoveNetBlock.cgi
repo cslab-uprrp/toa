@@ -54,23 +54,24 @@ NetBlockModel = NetBlockModel()
 
 UserModel = UserModel()
 
-timestamp = SessionModel.Validate(uid, sid, remote)
+if  SessionModel.connect() and UserModel.connect() and NetBlockModel.connect():
 
-if((timestamp+5)<=tmstp or timestamp == -1):
+	timestamp = SessionModel.Validate(uid, sid, remote)
 
-    SessionModel.Close(uid, remote)
+	if((timestamp+5)<=tmstp or timestamp == -1):
+		SessionModel.Close(uid, remote)
+		del NetBlockModel
+		del UserModel
+		del SessionModel
+		print """<script language=\"JavaScript\">{location.href=\"../index.cgi\";self.focus();}</script>"""
 
-    del NetBlockModel
+	SessionModel.UpdateTimeStamp(tmstp, uid, remote)
 
-    del UserModel
+	NetBlockModel.Remove(nid, netblock)
 
-    del SessionModel
+else:
 
-    print """<script language=\"JavaScript\">{location.href=\"../index.cgi\";self.focus();}</script>"""
-
-SessionModel.UpdateTimeStamp(tmstp, uid, remote)
-
-NetBlockModel.Remove(nid, netblock)
+    print "Database Connection Error. Configuration File Not Found."
 
 del NetBlockModel
 
