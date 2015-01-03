@@ -406,28 +406,19 @@ if ViewModel.connect() and UserModel.connect() and SessionModel.connect() and Ne
 
     N2N = Net2NetModel.GetAll(nid)
 
-    print "<table class='table' id='edit-net-table'>"
-
-    count = 0
-
     for n in N2N:
 
-        if count == 0:
+	print "<div class='col-md-2'>"
 
-            print "<tr>"
+        print "<div class='panel panel-default'>"
+  
+        print "<div class='panel-heading'>%s</div>"%(n[2])
 
+        print "<div class='panel-body'>"
 
-        elif count%2 == 0 and count != 0 and count != len(N2N)-1:
+        print "<a class='text-danger' href='../../Controllers/RemoveNet2Net.cgi?nid=%s&uid=%s&sid=%s&remote=%s&net2net=%s'>Remove <i class='glyphicon glyphicon-trash'></i></a>"%(nid, uid, sid, remote, n[0])
 
-            print "</tr>"
-
-        print "<center><td><h3>%s <a class='btn btn-danger' href='../../Controllers/RemoveNet2Net.cgi?nid=%s&uid=%s&sid=%s&remote=%s&net2net=%s'><i class='icon-remove'></i></a></h3></td>"%(n[2], nid, uid, sid, remote, n[0])
-
-        if count == len(N2N)-1:
-
-            print "</tr>"
-
-        count += 1
+        print "</div></div></div>"    
 
     print "</div>"
 

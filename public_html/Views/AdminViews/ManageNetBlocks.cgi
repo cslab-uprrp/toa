@@ -404,7 +404,6 @@ if SessionModel.connect() and UserModel.connect() and NetworkModel.connect() and
     print "</div><br><br><br><br><br>";
 
     AddNetBlockForm(nid, uid, sid, remote)
-    #AddPortsForm(nid, uid, sid, remote)
 
     NetBlocks = NetBlockModel.GetAll(nid)
 
@@ -412,7 +411,17 @@ if SessionModel.connect() and UserModel.connect() and NetworkModel.connect() and
 
     for nbs in NetBlocks:
 
-        print "<div class='col-md-3 col-md-offset-2'><div class='thumbnail'><h3>%s - %s <a class='text-danger' href='../../Controllers/RemoveNetBlock.cgi?nid=%s&uid=%s&sid=%s&remote=%s&netblock=%s'><i class='glyphicon glyphicon-remove'></i></a></h3></div></div>" % (socket.inet_ntoa(struct.pack('!L', nbs[1])), socket.inet_ntoa(struct.pack('!L', nbs[2])), nid, uid, sid, remote, nbs[0])
+        print "<div class='col-md-3'>"
+
+        print "<div class='panel panel-default'>"
+
+        print "<div class='panel-heading'>%s - %s</div>"%(socket.inet_ntoa(struct.pack('!L', nbs[1])), socket.inet_ntoa(struct.pack('!L', nbs[2])))
+
+        print "<div class='panel-body'>"
+
+        print "<a class='text-danger' href='../../Controllers/RemoveNetBlock.cgi?nid=%s&uid=%s&sid=%s&remote=%s&netblock=%s'>Remove <i class='glyphicon glyphicon-trash'></i></a>"%(nid, uid, sid, remote, nbs[0])
+
+        print "</div></div></div>"
 
     ######################### content  #########################
 
