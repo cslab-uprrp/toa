@@ -7,7 +7,7 @@ import sys
 import os
 import re
 import cgitb
-import datetime
+import time
 import urllib, hashlib
 import sys
 sys.path.append("../Models")
@@ -36,13 +36,11 @@ sid = form.getvalue("sid")
 
 remote = form.getvalue("remote")
 
-now = datetime.datetime.now()#generate the TimeStamp
+now = time.time()#generate the TimeStamp
 
 password = form.getvalue("password")
 
 cpassword = form.getvalue("cpassword")
-
-tmstp = now.minute#converting the TimeStamp to string 
 
 validator = re.compile('.(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#\$%@&\?\* "]).*$') 
 
@@ -52,7 +50,7 @@ UserModel = UserModel()
 
 if SessionModel.connect() and UserModel.connect():
 
-	timestamp = SessionModel.Validate(uid, sid, remote)
+	timestamp = SessionModel.Validate(uid, sid, remote, now)
 
 	if not timestamp:
 
@@ -64,7 +62,7 @@ if SessionModel.connect() and UserModel.connect():
 
 	    print """<script language=\"JavaScript\">{location.href=\"../index.cgi\";self.focus();}</script>"""
 
-	SessionModel.UpdateTimeStamp(tmstp, uid, remote)
+	SessionModel.UpdateTimeStamp(now, uid, remote)
 
 	errors = []
 
