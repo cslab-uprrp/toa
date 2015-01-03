@@ -364,6 +364,71 @@ def AddNetBlockForm(nid, uid, sid, remote):
 
 	print "</form><br><br>"
 
+def ResetPasswordViewForm(uid, sid, remote, errors):
+
+	print "<center>"
+
+	print "<form action='../../Controllers/ResetPassword.cgi' method='post'>"
+
+        print "<div class='form-group'><div class='input-group input-group-lg col-md-4'>"
+
+        print "<span class='input-group-addon'><i class='glyphicon glyphicon-lock'></i></span>"
+
+        print "<input type='password' value='' name='password' class='form-control' placeholder='New Password'/>"
+
+        print "</div></div>"
+
+        print "<div class='form-group'><div class='input-group input-group-lg col-md-4'>"
+
+        print "<span class='input-group-addon'><i class='glyphicon glyphicon-lock'></i></span>"
+
+        print "<input type='password' value='' placeholder='Confirm Password' name='cpassword' class='form-control'/>"
+
+        print "</div></div>"
+
+        print "<div class='row'>"
+
+        print "<div class='col-md-4 col-md-offset-4'>"
+
+        errors = errors.strip("[' | ']").split(",")
+
+        if "Password Changed" in errors:
+
+                print "<p class='text-success'>"
+
+                for error in errors:
+
+                        if error != None:
+
+                                print error.strip(" '|' ")
+
+                print "</p>"
+
+        else:
+
+                print "<p class='text-danger'>"
+
+                if '[' not in errors:
+
+                        for error in errors:
+
+                                print error.strip(" '|' ")
+
+                print "</p>"
+
+        print "</div></div>"
+
+	print "<br>"
+
+	print "<center><button class='btn btn-default btn-lg add-device-button' id='add-netblock-button'>Reset Password</button></center>"
+
+        print "<input type='hidden' name='uid' value='%s'/>"%(uid)
+
+        print "<input type='hidden' name='sid' value='%s'/>"%(sid)
+
+        print "<input type='hidden' name='remote' value='%s'/>"%(remote)
+
+	print "</form>"
 
 def AddViewForm(uid, sid, remote, errors):
 

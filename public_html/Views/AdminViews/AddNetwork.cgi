@@ -155,7 +155,7 @@ if SessionModel.connect() and UserModel.connect() and Net2NetModel.connect() and
 
     print "<ul class='dropdown-menu pull-right' role='menu'>"
       
-    print "<li><a tabindex='-1' href='#'>Reset Password</a></li>"
+    print "<li><a tabindex='-1' href='ResetPassword.cgi?uid=%s&sid=%s&remote=%s'>Reset Password</a></li>"%(uid, sid, remote)
 
     print "<li><a tabindex='-1' href='AddAccount.cgi?uid=%s&sid=%s&remote=%s'>Add Account</a></li>"%(uid, sid, remote)
 
