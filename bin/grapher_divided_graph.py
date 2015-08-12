@@ -34,13 +34,9 @@ def setsizetype_all(row,sizetype):
         if len(row) >0:
 
                 for i in range (len(row)):
-                        t=0
                         for m in range (len(max)):
-                                if max[m] <row[i][t]:
-                                        max[m]=row[i][t]
-                                if max[m] <row[i][t+1]:
-                                        max[m]=row[i][t+1]
-                                t+=2
+                                if max[m] <row[i][m]:
+                                        max[m]=row[i][m]
 
                 for i in range(len(max)):
 
@@ -53,6 +49,7 @@ def setsizetype_all(row,sizetype):
                         else:
                                 sizetype[i]="bytes"
                 return sizetype
+	return sizetype
 
 #this function sets the type of size (MB,GB,KB...) that the data is and returns it in the variable sizetype.  
 # It its specifically for the individual graphs that display octects or packets or flows
@@ -397,7 +394,7 @@ def graphInt24h(now, label, id, path):
 
 # The I/O Network data (24h)
 	
-    row = qb.IntRangeO(c, id, now, first) #Gets the dara from the database
+    row = qb.IntRangeO(c, id, now, first) #Gets the data from the database
     sizetype,max,min=setsizetype(row,sizetype)
     gen_ioscript_header(FILE1,sizetype)
     gen_iodata(FILE1, now, first, sizetype, row, "D")
